@@ -1,0 +1,15 @@
+.clickable-tile {
+    transition: transform 0.2s ease;
+    cursor: pointer;
+  }
+  
+  /* Scale up on hover */
+  .clickable-tile:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Scale down on click */
+  .clickable-tile.clicked {
+    transform: scale(0.9);
+  }
+  

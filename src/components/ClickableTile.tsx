@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './ClickableTile.css';
 
-interface ClickablePngProps {
+interface ClickableTileProps {
   src: string;
-  onClick: () => void;
   style?: React.CSSProperties;
 }
 
-const ClickablePng: React.FC<ClickablePngProps> = ({ src, onClick, style }) => {
+const ClickableTile: React.FC<ClickableTileProps> = ({ src, style }) => {
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = () => {
+    setClicked(true);
+    setTimeout(() => setClicked(false), 200); // Reset the click state after animation
+  };
+  
   return (
     <img
       src={src}
-      onClick={onClick}
-      style={{ cursor: 'pointer', ...style }}
+      className={`clickable-tile ${clicked ? 'clicked' : ''}`}
+      onClick={handleClick}
+      style={style}
     />
   );
 };
 
-export default ClickablePng;
+export default ClickableTile;
