@@ -10,8 +10,13 @@ import './../components-styling/Keyboard.css';
 
 const Keyboard: React.FC = () => {
   const [placeholderImages, setPlaceholderImages] = useState<string[]>([]);
+  const [confirmEnabled, setConfirmEnabled] = useState(false);
 
   const handleTileClick = (image: string) => {
+    if (placeholderImages.length === 13) {
+      setConfirmEnabled(true);
+      return;
+    }
     const newPlaceholderImages = [...placeholderImages];
     const imageInfo = extractImageInfo(image);
 
@@ -29,15 +34,19 @@ const Keyboard: React.FC = () => {
         newPlaceholderImages.push(image);
       }
     }
-
-    if (newPlaceholderImages.length <= 13) {
-      const sortedImages = sortImages(newPlaceholderImages);
-      setPlaceholderImages(sortedImages);
-    }
+    
+    const sortedImages = sortImages(newPlaceholderImages);    
+    setPlaceholderImages(sortedImages);
   };
 
   const handleClearClick = () => {
     setPlaceholderImages([]);
+    setConfirmEnabled(false); // Disable confirm button on clear
+  };
+
+  const handleConfirmClick = () => {
+    console.log("Confirmed:", placeholderImages);
+    setConfirmEnabled(false);
   };
 
   return (
@@ -46,6 +55,9 @@ const Keyboard: React.FC = () => {
       <div className="button-container">
         <button className="clear-button" onClick={handleClearClick}>
           Clear Placeholder
+        </button>
+        <button className="confirm-button" onClick={handleConfirmClick} disabled={!confirmEnabled}>
+          Confirm
         </button>
       </div>
       <TileRow images={pinImages} onTileClick={handleTileClick} />
