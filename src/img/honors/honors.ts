@@ -6,4 +6,4 @@ import nan from './nan.png';
 import qing from './qing.png';
 import xi from './xi.png';
 
-export const images = [bai, bei, dong, hong, nan, qing, xi];
+export const images = [dong, nan, xi, bei, hong, qing, bai];

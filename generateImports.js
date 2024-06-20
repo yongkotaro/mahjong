@@ -9,6 +9,11 @@ const directories = [
   { dir: path.join(__dirname, 'src/img/pin'), output: 'pin.ts' },
 ];
 
+// Function to sanitize variable names
+const sanitizeVariableName = (name) => {
+  return name.replace(/\.[^/.]+$/, "").replace(/[^a-zA-Z0-9]/g, '');
+};
+
 // Function to generate import statements for a directory
 const generateImportStatements = (directoryPath, outputPath) => {
   const validExtensions = ['.png', '.jpg', '.jpeg', '.svg'];
@@ -19,12 +24,18 @@ const generateImportStatements = (directoryPath, outputPath) => {
       return console.log('Unable to scan directory: ' + err);
     }
 
-    const importStatements = files.filter(isValidFile).map((file, index) => {
-      const variableName = `image${index + 1}`;
+    const importStatements = files.filter(isValidFile).map((file) => {
+      // Extract the suit part of the filename
+      const suit = file.split('-')[0]; // Assuming the format is "suit-number.png"
+      const variableName = sanitizeVariableName(suit);
       return `import ${variableName} from './${file}';`;
     });
 
-    const exportStatement = `export const images = [${files.filter(isValidFile).map((_, index) => `image${index + 1}`).join(', ')}];`;
+    // Rename the images according to their file names without the indexes
+    const exportStatement = `export const images = [${files.filter(isValidFile).map((file) => {
+      const suit = file.split('-')[0]; // Extract suit
+      return sanitizeVariableName(suit);
+    }).join(', ')}];`;
 
     const fileContent = `${importStatements.join('\n')}\n\n${exportStatement}`;
 
