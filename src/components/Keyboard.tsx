@@ -49,9 +49,16 @@ const Keyboard: React.FC = () => {
     setConfirmEnabled(false);
   };
 
+  const handleImageRemove = (index: number) => {
+    const newPlaceholderImages = [...placeholderImages];
+    newPlaceholderImages.splice(index, 1); // Remove element at index
+    setPlaceholderImages(newPlaceholderImages);
+    setConfirmEnabled(false); // Disable confirm button after removal
+  };
+
   return (
     <div className="keyboard">
-      <PlaceholderRow images={placeholderImages} />
+      <PlaceholderRow images={placeholderImages} onTileClick={handleImageRemove}/>
       <div className="button-container">
         <button className="clear-button" onClick={handleClearClick}>
           Clear Placeholder
