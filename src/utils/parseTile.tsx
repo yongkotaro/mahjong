@@ -41,26 +41,35 @@ export const setBoolean = (tiles: TileInfo[]): void => {
     }
 };
 
-export const updateTileStatsMap = (tiles: TileInfo[], tileStatsMap: { [key: string]: TileStats }) => {
-    setBoolean(tiles);
 
-    tiles.forEach(tile => {
-        const key = '';
-        if (!tile.isSpecial) {
-            const key = `${tile.suit}${tile.number}`;
-            tileStatsMap[key].maxCount = 4;
-            tileStatsMap[key].isSpecial = false;            
-        } else {
-            const key = `${tile.suit}`
-            tileStatsMap[key].maxCount = 3;
-            tileStatsMap[key].isSpecial = true;
-        }
-        tileStatsMap[key].src = tile.src;   
-        tileStatsMap[key].count = (tileStatsMap[key].count || 0) + 1;
-        tileStatsMap[key].currentlyUsed = 0;
-        tileStatsMap[key].allUsed = false;
-    });
-    return tileStatsMap;
+export const updateTileStatsMap = (tiles: TileInfo[], tileStatsMap: { [key: string]: TileStats }): TileStatsMap => {
+  setBoolean(tiles);
+
+  tiles.forEach(tile => {
+      let key = '';
+      if (!tile.isSpecial) {
+          key = `${tile.suit}${tile.number}`;
+      } else {
+          key = `${tile.suit}`;
+      }
+
+      if (!tileStatsMap[key]) {
+          tileStatsMap[key] = {
+              src: tile.src,
+              maxCount: 0,
+              count: 0,
+              currentlyUsed: 0,
+              allUsed: false,
+              isSpecial: tile.isSpecial
+          };
+      }
+
+      tileStatsMap[key].maxCount = tile.isSpecial ? 3 : 4;
+      tileStatsMap[key].src = tile.src;
+      tileStatsMap[key].count = (tileStatsMap[key].count || 0) + 1;
+  });
+
+  return tileStatsMap;
 };
 
 export const extractImageInfo = (filename: string): TileInfo => {

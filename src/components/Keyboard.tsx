@@ -6,7 +6,7 @@ import { images as bambooImages } from '../img/bamboo/bamboo';
 import { images as manImages } from '../img/man/man';
 import { images as pinImages } from '../img/pin/pin';
 import { sortImages } from '../utils/sortTiles';
-import { extractImageInfo } from '../utils/parseTile';
+import { extractImageInfo, updateTileStatsMap } from '../utils/parseTile';
 import './../components-styling/Keyboard.css';
 
 const Keyboard: React.FC = () => {
@@ -46,7 +46,7 @@ const Keyboard: React.FC = () => {
   };
 
   const handleConfirmClick = () => {
-    console.log("Confirmed:", placeholderImages);
+    console.log(updateTileStatsMap(placeholderImages.map(extractImageInfo), {}));
     setConfirmEnabled(false);
   };
 
