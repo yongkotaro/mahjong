@@ -1,33 +1,6 @@
-type ImageInfo = {
-  src: string;
-  suit: string | null;
-  number: number | null;
-  isSpecial: boolean;
-};
+import { extractImageInfo } from './parseTile';
 
 const suitsOrder = ['pin', 'bamboo', 'man'];
-
-export const extractImageInfo = (filename: string): ImageInfo => {
-  const regex = /(\w+)(\d+)\.[a-f0-9]{8,}\.png$/;
-  const match = filename.match(regex);
-
-  if (!match) {
-    // Handle special tiles that do not follow the naming convention
-    return {
-      src: filename,
-      suit: null,
-      number: null,
-      isSpecial: true,
-    };
-  }
-
-  return {
-    src: filename,
-    suit: match[1],
-    number: parseInt(match[2], 10),
-    isSpecial: false,
-  };
-};
 
 export const sortImages = (filenames: string[]): string[] => {
   const imageInfos = filenames.map(extractImageInfo);

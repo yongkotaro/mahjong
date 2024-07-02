@@ -5,7 +5,8 @@ import { images as honorImages } from '../img/honors/honors';
 import { images as bambooImages } from '../img/bamboo/bamboo';
 import { images as manImages } from '../img/man/man';
 import { images as pinImages } from '../img/pin/pin';
-import { sortImages, extractImageInfo } from '../utils/sortTiles';
+import { sortImages } from '../utils/sortTiles';
+import { extractImageInfo } from '../utils/parseTile';
 import './../components-styling/Keyboard.css';
 
 const Keyboard: React.FC = () => {
@@ -61,7 +62,7 @@ const Keyboard: React.FC = () => {
       <PlaceholderRow images={placeholderImages} onTileClick={handleImageRemove}/>
       <div className="button-container">
         <button className="clear-button" onClick={handleClearClick}>
-          Clear Placeholder
+          Clear 
         </button>
         <button className="confirm-button" onClick={handleConfirmClick} disabled={!confirmEnabled}>
           Confirm

@@ -12,7 +12,7 @@ const TileRow: React.FC<TileRowProps> = ({ images, onTileClick }) => {
     <div className="tile-row">
       {images.map((image, index) => (
         <ClickableTile
-          key={index} // Adding a key prop with a unique value
+          key={index} 
           src={image}
           style={{ width: '50px', height: '50px' }}
           onClick={() => onTileClick(image)}
