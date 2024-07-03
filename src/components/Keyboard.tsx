@@ -36,7 +36,8 @@ const Keyboard: React.FC = () => {
       }
     }
     
-    const sortedImages = sortImages(newPlaceholderImages);    
+    const sortedImages = sortImages(newPlaceholderImages);
+    console.log(sortedImages);    
     setPlaceholderImages(sortedImages);
   };
 

@@ -65,7 +65,6 @@ export const updateTileStatsMap = (tiles: TileInfo[], tileStatsMap: { [key: stri
       }
 
       tileStatsMap[key].maxCount = tile.isSpecial ? 3 : 4;
-      tileStatsMap[key].src = tile.src;
       tileStatsMap[key].count = (tileStatsMap[key].count || 0) + 1;
   });
 
@@ -87,7 +86,7 @@ export const extractImageInfo = (filename: string): TileInfo => {
     }
   
     // Handle special tiles
-    const specialPattern = /^(\w+)\.[a-f0-9]{0,}\.png$/;
+    const specialPattern = /(\w+)\.[a-f0-9]{0,}\.png$/;
     const specialMatch = filename.match(specialPattern);
     
     if (specialMatch) {
@@ -99,10 +98,10 @@ export const extractImageInfo = (filename: string): TileInfo => {
       };
     }
     
-    // Handle unkown tiles
+    // Handle baiban/white dragon
     return {
       src: filename,
-      suit: 'unknown',
+      suit: 'baiban',
       number: 0,
       isSpecial: true,
     };
