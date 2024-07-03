@@ -1,43 +1,13 @@
-import { TileInfo, TileStats, TileStatsMap, extractImageInfo, updateTileStatsMap, hasMan, hasBamboo, hasHonor, hasPin, mans, pins, bamboos, honors } from "./parseTile";
-
-export const winningTiles = (userHand: string[]): string[] => {
-    const winningTiles: string[] = [];
-    const tiles = updateTileStatsMap(userHand.map(extractImageInfo), {});
-
-    const checkSuit = (suit: string, suitTiles: TileInfo[]) => {
-        suitTiles.forEach(tile => {
-            const key = `${suit}${tile.number}`;
-            const fullHand = JSON.parse(JSON.stringify(tiles)); // Deep copy of tiles for each iteration
-
-            if (fullHand[key] && fullHand[key].count < fullHand[key].maxCount) {
-                fullHand[key].count++;
-                if (isCompleteHand(fullHand)) {
-                    winningTiles.push(tile.src);
-                }
-            }
-        });
-    };
-
-    if (hasPin) checkSuit("pin", pins);
-    if (hasMan) checkSuit("man", mans);
-    if (hasBamboo) checkSuit("bamboo", bamboos);
-    if (hasHonor) {
-        honors.forEach(honor => {
-            const key = `${honor.suit}`;
-            const fullHand = JSON.parse(JSON.stringify(tiles)); // Deep copy of tiles for each iteration
-
-            if (fullHand[key] && fullHand[key].count < fullHand[key].maxCount) {
-                fullHand[key].count++;
-                if (isCompleteHand(fullHand)) {
-                    winningTiles.push(honor.src);
-                }
-            }
-        });
-    }
-
-    return winningTiles;
+export type TileStats = {
+    suit: string;
+    number: number;
+    src: string;
+    maxCount: number;
+    count: number;
+    isSpecial: boolean;
 };
 
+export type TileStatsMap = { [key: string]: TileStats };
 
 const isPair = (tile: TileStats): boolean => tile.count >= 2;
 
@@ -45,7 +15,6 @@ const isPung = (tile: TileStats): boolean => tile.count >= 3;
 
 const isChow = (tiles: TileStats[], index: number): boolean => {
     if (index + 2 >= tiles.length) return false;
-    if (tiles[index].isSpecial) return false;
     const first = tiles[index];
     const second = tiles[index + 1];
     const third = tiles[index + 2];
@@ -89,6 +58,8 @@ const checkMelds = (tileStatsMap: TileStatsMap): boolean => {
 
 export const isCompleteHand = (tileStatsMap: TileStatsMap): boolean => {
     const tileEntries = Object.entries(tileStatsMap).filter(([_, stats]) => stats.count > 0);
+    if (tileEntries.length === 0) return true;
+
     for (const [key, tile] of tileEntries) {
         if (isPair(tile)) {
             const handWithoutPair = removeTiles(tileStatsMap, { [key]: 2 });

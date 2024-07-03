@@ -17,10 +17,10 @@ export type TileInfo = {
 
 export type TileStats = {
     src: string;
+    suit: string;
+    number: number;
     maxCount: number;
     count: number;
-    currentlyUsed: number;
-    allUsed: boolean;
     isSpecial: boolean;
 };
 
@@ -56,10 +56,10 @@ export const updateTileStatsMap = (tiles: TileInfo[], tileStatsMap: { [key: stri
       if (!tileStatsMap[key]) {
           tileStatsMap[key] = {
               src: tile.src,
+              suit: tile.suit,
+              number: tile.number,
               maxCount: 0,
               count: 0,
-              currentlyUsed: 0,
-              allUsed: false,
               isSpecial: tile.isSpecial
           };
       }

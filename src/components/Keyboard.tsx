@@ -8,9 +8,11 @@ import { images as pinImages } from '../img/pin/pin';
 import { sortImages } from '../utils/sortTiles';
 import { extractImageInfo, updateTileStatsMap } from '../utils/parseTile';
 import './../components-styling/Keyboard.css';
+import { winningTiles } from '../utils/winningTiles';
 
 const Keyboard: React.FC = () => {
   const [placeholderImages, setPlaceholderImages] = useState<string[]>([]);
+  const [wonTiles, setWonTiles] = useState<string[]>([]);
   const [confirmEnabled, setConfirmEnabled] = useState(false);
 
   const handleTileClick = (image: string) => {
@@ -37,7 +39,6 @@ const Keyboard: React.FC = () => {
     }
     
     const sortedImages = sortImages(newPlaceholderImages);
-    console.log(sortedImages);    
     setPlaceholderImages(sortedImages);
   };
 
@@ -47,7 +48,7 @@ const Keyboard: React.FC = () => {
   };
 
   const handleConfirmClick = () => {
-    console.log(updateTileStatsMap(placeholderImages.map(extractImageInfo), {}));
+    setWonTiles(winningTiles(placeholderImages));
     setConfirmEnabled(false);
   };
 
@@ -68,6 +69,10 @@ const Keyboard: React.FC = () => {
         <button className="confirm-button" onClick={handleConfirmClick} disabled={!confirmEnabled}>
           Confirm
         </button>
+      </div>
+      <div className="winning-tiles">
+        <h2>Winning Tiles</h2>
+        <PlaceholderRow images={wonTiles} onTileClick={handleImageRemove}/>
       </div>
       <TileRow images={pinImages} onTileClick={handleTileClick} />
       <TileRow images={bambooImages} onTileClick={handleTileClick} />
