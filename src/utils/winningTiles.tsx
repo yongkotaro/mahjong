@@ -3,13 +3,26 @@ import { TileInfo, TileStats, TileStatsMap, extractImageInfo, updateTileStatsMap
 export const winningTiles = (userHand: string[]): string[] => {
     const winningTiles: string[] = [];
     const tiles = updateTileStatsMap(userHand.map(extractImageInfo), {});
-
+    
     const checkSuit = (suit: string, suitTiles: TileInfo[]) => {
         suitTiles.forEach(tile => {
             const key = `${suit}${tile.number}`;
             const fullHand = JSON.parse(JSON.stringify(tiles)); // Deep copy of tiles for each iteration
 
-            if (fullHand[key] && fullHand[key].count < fullHand[key].maxCount) {
+            // Initialize tile if it does not exist
+            if (!fullHand[key]) {
+                fullHand[key] = {
+                    src: tile.src,
+                    suit: tile.suit,
+                    number: tile.number,
+                    maxCount: 4,
+                    count: 0,
+                    isSpecial: false
+                };
+                console.log(fullHand[key]);
+            }
+
+            if (fullHand[key].count < fullHand[key].maxCount) {
                 fullHand[key].count++;
                 if (isCompleteHand(fullHand)) {
                     winningTiles.push(tile.src);
@@ -26,7 +39,19 @@ export const winningTiles = (userHand: string[]): string[] => {
             const key = `${honor.suit}`;
             const fullHand = JSON.parse(JSON.stringify(tiles)); // Deep copy of tiles for each iteration
 
-            if (fullHand[key] && fullHand[key].count < fullHand[key].maxCount) {
+            // Initialize tile if it does not exist
+            if (!fullHand[key]) {
+                fullHand[key] = {
+                    src: honor.src,
+                    suit: honor.suit,
+                    number: honor.number,
+                    maxCount: 3,
+                    count: 0,
+                    isSpecial: true
+                };
+            }
+
+            if (fullHand[key].count < fullHand[key].maxCount) {
                 fullHand[key].count++;
                 if (isCompleteHand(fullHand)) {
                     winningTiles.push(honor.src);
@@ -37,7 +62,6 @@ export const winningTiles = (userHand: string[]): string[] => {
 
     return winningTiles;
 };
-
 
 const isPair = (tile: TileStats): boolean => tile.count >= 2;
 
@@ -88,7 +112,7 @@ const checkMelds = (tileStatsMap: TileStatsMap): boolean => {
 };
 
 export const isCompleteHand = (tileStatsMap: TileStatsMap): boolean => {
-    const tileEntries = Object.entries(tileStatsMap).filter(([_, stats]) => stats.count > 0);
+    const tileEntries = Object.entries(tileStatsMap);
     for (const [key, tile] of tileEntries) {
         if (isPair(tile)) {
             const handWithoutPair = removeTiles(tileStatsMap, { [key]: 2 });

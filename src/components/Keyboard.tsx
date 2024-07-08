@@ -6,7 +6,7 @@ import { images as bambooImages } from '../img/bamboo/bamboo';
 import { images as manImages } from '../img/man/man';
 import { images as pinImages } from '../img/pin/pin';
 import { sortImages } from '../utils/sortTiles';
-import { extractImageInfo, updateTileStatsMap } from '../utils/parseTile';
+import { extractImageInfo } from '../utils/parseTile';
 import './../components-styling/Keyboard.css';
 import { winningTiles } from '../utils/winningTiles';
 
@@ -16,34 +16,37 @@ const Keyboard: React.FC = () => {
   const [confirmEnabled, setConfirmEnabled] = useState(false);
 
   const handleTileClick = (image: string) => {
-    if (placeholderImages.length === 13) {
-      setConfirmEnabled(true);
-      return;
-    }
-    const newPlaceholderImages = [...placeholderImages];
-    const imageInfo = extractImageInfo(image);
-
-    // Count the occurrences of the image in the placeholderImages
-    const imageCount = newPlaceholderImages.filter(img => img === image).length;
-
-    if (imageInfo.isSpecial) {
-      // Allow up to 3 duplicates for special tiles
-      if (imageCount < 3) {
-        newPlaceholderImages.push(image);
+    if (placeholderImages.length < 13) {
+      const newPlaceholderImages = [...placeholderImages];
+      const imageInfo = extractImageInfo(image);
+  
+      // Count the occurrences of the image in the placeholderImages
+      const imageCount = newPlaceholderImages.filter(img => img === image).length;
+  
+      if (imageInfo.isSpecial) {
+        // Allow up to 3 duplicates for special tiles
+        if (imageCount < 3) {
+          newPlaceholderImages.push(image);
+        }
+      } else {
+        // Allow up to 4 duplicates for suits
+        if (imageCount < 4) {
+          newPlaceholderImages.push(image);
+        }
       }
-    } else {
-      // Allow up to 4 duplicates for suits
-      if (imageCount < 4) {
-        newPlaceholderImages.push(image);
+  
+      const sortedImages = sortImages(newPlaceholderImages);
+      setPlaceholderImages(sortedImages);
+  
+      if (newPlaceholderImages.length === 13) {
+        setConfirmEnabled(true);
       }
     }
-    
-    const sortedImages = sortImages(newPlaceholderImages);
-    setPlaceholderImages(sortedImages);
   };
 
   const handleClearClick = () => {
     setPlaceholderImages([]);
+    setWonTiles([]);
     setConfirmEnabled(false); // Disable confirm button on clear
   };
 
@@ -59,6 +62,9 @@ const Keyboard: React.FC = () => {
     setConfirmEnabled(false); // Disable confirm button after removal
   };
 
+  const handleWinningTile = (index: number) => {
+  };
+
   return (
     <div className="keyboard">
       <PlaceholderRow images={placeholderImages} onTileClick={handleImageRemove}/>
@@ -72,7 +78,7 @@ const Keyboard: React.FC = () => {
       </div>
       <div className="winning-tiles">
         <h2>Winning Tiles</h2>
-        <PlaceholderRow images={wonTiles} onTileClick={handleImageRemove}/>
+        <PlaceholderRow images={wonTiles} onTileClick={handleWinningTile}/>
       </div>
       <TileRow images={pinImages} onTileClick={handleTileClick} />
       <TileRow images={bambooImages} onTileClick={handleTileClick} />

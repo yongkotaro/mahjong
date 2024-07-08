@@ -3,10 +3,10 @@ import { images as bambooImages } from '../img/bamboo/bamboo';
 import { images as manImages } from '../img/man/man';
 import { images as pinImages } from '../img/pin/pin';
 
-export let hasPin: boolean = false;
-export let hasMan: boolean = false;
-export let hasBamboo: boolean = false;
-export let hasHonor: boolean = false;
+export let hasPin: boolean;
+export let hasMan: boolean;
+export let hasBamboo: boolean;
+export let hasHonor: boolean;
 
 export type TileInfo = {
     src: string;
@@ -27,18 +27,10 @@ export type TileStats = {
 export type TileStatsMap = { [key: string]: TileStats };
 
 export const setBoolean = (tiles: TileInfo[]): void => {
-    if (tiles.some(tile => tile.suit == 'pin')) {
-      hasPin = true;
-    }
-    if (tiles.some(tile => tile.suit == 'man')) {
-      hasMan = true;
-    }
-    if (tiles.some(tile => tile.suit == 'bamboo')) {
-      hasBamboo = true;
-    }
-    if (tiles.some(tile => tile.isSpecial)) {
-      hasHonor = true;
-    }
+  hasPin = tiles.some(tile => tile.suit == 'pin');
+  hasMan = tiles.some(tile => tile.suit == 'man');
+  hasBamboo = tiles.some(tile => tile.suit == 'bamboo');
+  hasHonor = tiles.some(tile => tile.isSpecial);
 };
 
 
