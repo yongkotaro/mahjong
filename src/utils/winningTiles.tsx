@@ -19,7 +19,6 @@ export const winningTiles = (userHand: string[]): string[] => {
                     count: 0,
                     isSpecial: false
                 };
-                console.log(fullHand[key]);
             }
 
             if (fullHand[key].count < fullHand[key].maxCount) {
@@ -88,18 +87,29 @@ const removeTiles = (tileStatsMap: TileStatsMap, tilesToRemove: { [key: string]:
     return newTileStatsMap;
 };
 
+// Sorting function for tile entries
+const sortTiles = (tileEntries: [string, TileStats][]): [string, TileStats][] => {
+    return tileEntries.sort(([keyA, tileA], [keyB, tileB]) => {
+        if (tileA.suit === tileB.suit) {
+            return tileA.number - tileB.number;
+        }
+        return tileA.suit.localeCompare(tileB.suit);
+    });
+};
+
 const checkMelds = (tileStatsMap: TileStatsMap): boolean => {
     const tileEntries = Object.entries(tileStatsMap).filter(([_, stats]) => stats.count > 0);
-    if (tileEntries.length === 0) return true;
+    const sortedTileEntries = sortTiles(tileEntries); // Sort tile entries
+    if (sortedTileEntries.length === 0) return true;
 
-    for (let i = 0; i < tileEntries.length; i++) {
-        const [key, tile] = tileEntries[i];
+    for (let i = 0; i < sortedTileEntries.length; i++) {
+        const [key, tile] = sortedTileEntries[i];
         if (isPung(tile)) {
             const handWithoutPung = removeTiles(tileStatsMap, { [key]: 3 });
             if (checkMelds(handWithoutPung)) return true;
         }
-        if (isChow(tileEntries.map(([_, stats]) => stats), i)) {
-            const chowKeys = [tileEntries[i][0], tileEntries[i + 1][0], tileEntries[i + 2][0]];
+        if (isChow(sortedTileEntries.map(([_, stats]) => stats), i)) {
+            const chowKeys = [sortedTileEntries[i][0], sortedTileEntries[i + 1][0], sortedTileEntries[i + 2][0]];
             const handWithoutChow = removeTiles(tileStatsMap, {
                 [chowKeys[0]]: 1,
                 [chowKeys[1]]: 1,
@@ -113,6 +123,7 @@ const checkMelds = (tileStatsMap: TileStatsMap): boolean => {
 
 export const isCompleteHand = (tileStatsMap: TileStatsMap): boolean => {
     const tileEntries = Object.entries(tileStatsMap);
+    console.log(tileEntries);
     for (const [key, tile] of tileEntries) {
         if (isPair(tile)) {
             const handWithoutPair = removeTiles(tileStatsMap, { [key]: 2 });
