@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './../components-styling/ClickableTile.css';
+import './ClickableTile.css';
 
 interface ClickableTileProps {
   src: string;
@@ -13,15 +13,16 @@ const ClickableTile: React.FC<ClickableTileProps> = ({ src, style, onClick }) =>
   const handleClick = () => {
     setClicked(true);
     setTimeout(() => setClicked(false), 200); // Reset the click state after animation
-    
+
     if (onClick) {
       onClick();
     }
   };
-  
+
   return (
     <img
       src={src}
+      alt="tile"
       className={`clickable-tile ${clicked ? 'clicked' : ''}`}
       onClick={handleClick}
       style={style}

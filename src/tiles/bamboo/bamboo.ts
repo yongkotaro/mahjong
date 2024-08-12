@@ -8,4 +8,4 @@ import bamboo7 from './bamboo7.png';
 import bamboo8 from './bamboo8.png';
 import bamboo9 from './bamboo9.png';
 
-export const images = [bamboo1, bamboo2, bamboo3, bamboo4, bamboo5, bamboo6, bamboo7, bamboo8, bamboo9];
+export const bambooImages = [bamboo1, bamboo2, bamboo3, bamboo4, bamboo5, bamboo6, bamboo7, bamboo8, bamboo9];

@@ -8,4 +8,4 @@ import man7 from './man7.png';
 import man8 from './man8.png';
 import man9 from './man9.png';
 
-export const images = [man1, man2, man3, man4, man5, man6, man7, man8, man9];
+export const manImages = [man1, man2, man3, man4, man5, man6, man7, man8, man9];

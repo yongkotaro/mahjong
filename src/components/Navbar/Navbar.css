@@ -1,0 +1,79 @@
+.logo img {
+    width: 120px;
+    cursor: pointer;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: transparent;
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1); 
+    border-radius: 30px; 
+    backdrop-filter: blur(5px);
+    width: 80%; 
+    max-width: 800px; 
+    margin: 10px auto; /* Center the navbar itself */
+}
+
+nav ul {
+    display: flex;
+    margin-left: auto;
+}
+
+nav ul li a {
+    color: black;
+    padding: 0.2rem;
+    margin: 0 0.5rem;
+    border-radius: 10px;
+}
+
+nav ul li a:hover {
+    background: hsla(240, 3%, 94%, 0.5);
+}
+
+.menu-icon {
+    display: none;
+}
+
+@media (max-width: 540px) {
+    nav {
+        padding: 5px 2%;
+        max-width: 100%;
+        align-items: center;
+    }
+
+    .menu-icon {
+        display: block;
+        margin-left: auto;
+        cursor: pointer; 
+    }
+
+    nav ul {
+        display: none; 
+        flex-direction: column; 
+        width: 100%;
+        padding: 0;
+        position: absolute; 
+        top: 35px; 
+        left: 0;
+        background: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+        border-radius: 10px;
+        z-index: 999; 
+        backdrop-filter: blur(100px); 
+        text-align: center;
+    }
+
+    nav ul.open {
+        display: flex;
+    }
+
+    nav ul li a {
+        padding: 0.5rem; /* Increase padding for better touch targets */
+        display: block; /* Ensure each link takes up the full width */
+    }
+
+}

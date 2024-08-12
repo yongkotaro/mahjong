@@ -1,9 +1,9 @@
-import { TileInfo, TileStats, TileStatsMap, extractImageInfo, updateTileStatsMap, hasMan, hasBamboo, hasHonor, hasPin, mans, pins, bamboos, honors } from "./parseTile";
+import { TileInfo, TileStats, TileStatsMap, extractImageInfo, updateTileStatsMap, hasMan, hasBamboo, hasHonor, hasPin, mans, pins, bamboos, honors } from "./parseTiles";
 
 export const winningTiles = (userHand: string[]): string[] => {
     const winningTiles: string[] = [];
     const tiles = updateTileStatsMap(userHand.map(extractImageInfo), {});
-    
+
     const checkSuit = (suit: string, suitTiles: TileInfo[]) => {
         suitTiles.forEach(tile => {
             const key = `${suit}${tile.number}`;
@@ -73,8 +73,8 @@ const isChow = (tiles: TileStats[], index: number): boolean => {
     const second = tiles[index + 1];
     const third = tiles[index + 2];
     return first.suit === second.suit && second.suit === third.suit &&
-           first.count > 0 && second.count > 0 && third.count > 0 &&
-           first.number + 1 === second.number && second.number + 1 === third.number;
+        first.count > 0 && second.count > 0 && third.count > 0 &&
+        first.number + 1 === second.number && second.number + 1 === third.number;
 };
 
 const removeTiles = (tileStatsMap: TileStatsMap, tilesToRemove: { [key: string]: number }): TileStatsMap => {
@@ -123,7 +123,6 @@ const checkMelds = (tileStatsMap: TileStatsMap): boolean => {
 
 export const isCompleteHand = (tileStatsMap: TileStatsMap): boolean => {
     const tileEntries = Object.entries(tileStatsMap);
-    console.log(tileEntries);
     for (const [key, tile] of tileEntries) {
         if (isPair(tile)) {
             const handWithoutPair = removeTiles(tileStatsMap, { [key]: 2 });

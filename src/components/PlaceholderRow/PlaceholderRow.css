@@ -1,0 +1,7 @@
+.placeholder-row {
+    display: flex;
+    justify-content: center;
+    column-gap: 5px; 
+    margin-bottom: 10px; 
+  }
+  

@@ -1,7 +1,7 @@
 .tile-row {
     display: flex;
     justify-content: center;
-    gap: 5px;
+    column-gap: 0px;
     margin-bottom: 5px;
   }
   

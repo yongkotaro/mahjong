@@ -1,4 +1,4 @@
-import { extractImageInfo } from './parseTile';
+import { extractImageInfo } from './parseTiles';
 
 const suitsOrder = ['pin', 'bamboo', 'man'];
 

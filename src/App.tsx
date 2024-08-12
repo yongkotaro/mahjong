@@ -1,13 +1,19 @@
 import React from 'react';
 import './App.css';
-import Keyboard from './components/Keyboard';
+import Navbar from './components/Navbar/Navbar';
+import { Home, Links, About } from './pages';
+
 
 const App: React.FC = () => {
+
   return (
     <div className="App">
-      <span className="heading">TileWaiter</span>
-      <Keyboard />
+      <Navbar />
+      <Home />
+      <About />
+      <Links />
     </div>
+
   );
 }
 

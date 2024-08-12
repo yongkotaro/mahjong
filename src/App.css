@@ -1,28 +1,8 @@
 .App {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(rgba(196, 223, 246, 0.6), white);
 }
 
-.heading {
-  font-size: 2rem;
-  margin: 1rem;
-  color: black;
-  z-index: 1;
-  text-align: center;
-  animation: slideInFromLeft 1s ease-out;
-}
 
-@keyframes slideInFromLeft {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
+

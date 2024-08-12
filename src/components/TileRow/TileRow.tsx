@@ -1,6 +1,6 @@
 import React from 'react';
-import ClickableTile from './ClickableTile';
-import './../components-styling/TileRow.css';
+import ClickableTile from '../ClickableTile/ClickableTile';
+import './TileRow.css';
 
 interface TileRowProps {
   images: string[];
@@ -12,7 +12,7 @@ const TileRow: React.FC<TileRowProps> = ({ images, onTileClick }) => {
     <div className="tile-row">
       {images.map((image, index) => (
         <ClickableTile
-          key={index} 
+          key={index}
           src={image}
           style={{ width: '50px', height: '50px' }}
           onClick={() => onTileClick(image)}

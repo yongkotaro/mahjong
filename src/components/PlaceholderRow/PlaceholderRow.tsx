@@ -1,6 +1,6 @@
 import React from 'react';
-import ClickableTile from './ClickableTile';
-import './../components-styling/PlaceholderRow.css';
+import ClickableTile from '../ClickableTile/ClickableTile';
+import './PlaceholderRow.css';
 
 interface PlaceholderRowProps {
   images: string[];
