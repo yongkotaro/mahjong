@@ -1,19 +1,19 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/Navbar/Navbar';
-import { Home, Links, About } from './pages';
+import { Home, Links, About, Terms, Header, Footer } from './containers';
 
 
 const App: React.FC = () => {
 
   return (
     <div className="App">
-      <Navbar />
-      <Home />
+      <Header />
       <About />
+      <Home />
       <Links />
+      <Terms />
+      <Footer />
     </div>
-
   );
 }
 

@@ -7,7 +7,7 @@ interface PlaceholderRowProps {
   onTileClick: (index: number) => void;
 }
 
-const PlaceholderRow: React.FC<PlaceholderRowProps> = ({ images, onTileClick }) => {
+export const PlaceholderRow: React.FC<PlaceholderRowProps> = ({ images, onTileClick }) => {
   const handleTileClick = (index: number) => {
     onTileClick(index);
   }
@@ -18,7 +18,6 @@ const PlaceholderRow: React.FC<PlaceholderRowProps> = ({ images, onTileClick }) 
         <ClickableTile
           key={index} // Adding a key prop with a unique value
           src={image}
-          style={{ width: '50px', height: '50px' }}
           onClick={() => handleTileClick(index)}
         />
       ))}
@@ -26,4 +25,3 @@ const PlaceholderRow: React.FC<PlaceholderRowProps> = ({ images, onTileClick }) 
   );
 };
 
-export default PlaceholderRow;

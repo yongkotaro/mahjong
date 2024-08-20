@@ -25,7 +25,6 @@ const ClickableTile: React.FC<ClickableTileProps> = ({ src, style, onClick }) =>
       alt="tile"
       className={`clickable-tile ${clicked ? 'clicked' : ''}`}
       onClick={handleClick}
-      style={style}
     />
   );
 };

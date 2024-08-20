@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import TileRow from '../../components/TileRow/TileRow';
-import PlaceholderRow from '../../components/PlaceholderRow/PlaceholderRow';
-
+import { KeyboardRow, PlaceholderRow } from '../../components/';
 import { honorImages, manImages, pinImages, bambooImages } from '../../tiles';
 import { sortImages, extractImageInfo, winningTiles } from '../../utils';
 import './Home.css';
@@ -67,7 +65,7 @@ export const Home: React.FC = () => {
   };
 
   return (
-    <div className="keyboard">
+    <div className='main'>
       <PlaceholderRow images={placeholderImages} onTileClick={handleImageRemove} />
       <div className="button-container">
         <button className="clear-button" onClick={handleClearClick}>
@@ -77,10 +75,12 @@ export const Home: React.FC = () => {
           Confirm
         </button>
       </div>
-      <TileRow images={pinImages} onTileClick={handleTileClick} />
-      <TileRow images={bambooImages} onTileClick={handleTileClick} />
-      <TileRow images={manImages} onTileClick={handleTileClick} />
-      <TileRow images={honorImages} onTileClick={handleTileClick} />
+      <div className="keyboard">
+        <KeyboardRow images={pinImages} onTileClick={handleTileClick} />
+        <KeyboardRow images={bambooImages} onTileClick={handleTileClick} />
+        <KeyboardRow images={manImages} onTileClick={handleTileClick} />
+        <KeyboardRow images={honorImages} onTileClick={handleTileClick} />
+      </div>
       {
         confirmPressed &&
         <div className="winning-tiles">

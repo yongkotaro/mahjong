@@ -1,0 +1,16 @@
+.container {
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 60vh;
+    width: 100%;
+    z-index: 1;
+}
+
+.container:before {
+    content: '';
+    background: url('../../assets/hero.jpg') center center/cover;
+    opacity: 0.4;
+    height: 60vh;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}

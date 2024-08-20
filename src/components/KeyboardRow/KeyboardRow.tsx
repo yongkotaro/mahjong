@@ -1,20 +1,19 @@
 import React from 'react';
 import ClickableTile from '../ClickableTile/ClickableTile';
-import './TileRow.css';
+import './KeyboardRow.css';
 
-interface TileRowProps {
+interface KeyboardRowProps {
   images: string[];
   onTileClick: (image: string) => void;
 }
 
-const TileRow: React.FC<TileRowProps> = ({ images, onTileClick }) => {
+export const KeyboardRow: React.FC<KeyboardRowProps> = ({ images, onTileClick }) => {
   return (
-    <div className="tile-row">
+    <div className="keyboard-row">
       {images.map((image, index) => (
         <ClickableTile
           key={index}
           src={image}
-          style={{ width: '50px', height: '50px' }}
           onClick={() => onTileClick(image)}
         />
       ))}
@@ -22,4 +21,4 @@ const TileRow: React.FC<TileRowProps> = ({ images, onTileClick }) => {
   );
 };
 
-export default TileRow;
+

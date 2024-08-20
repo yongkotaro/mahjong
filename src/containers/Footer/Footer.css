@@ -1,0 +1,20 @@
+.footer {
+    background-color: #1a202c;
+    color: white;
+    padding-bottom: 8px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    text-align: center;
+    padding-top: 2px;
+    color: #a0aec0;
+    font-size: 0.875rem;
+
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
