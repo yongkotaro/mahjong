@@ -1,20 +1,21 @@
 .footer {
     background-color: #1a202c;
     color: white;
-    padding-bottom: 8px;
 }
 
 .footer-content {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
     text-align: center;
-    padding-top: 2px;
+    align-items: center;
+    padding: 2.5rem 1.25rem;
     color: #a0aec0;
-    font-size: 0.875rem;
+    font-size: 1rem;
+}
 
-
-    @media (min-width: 768px) {
-        grid-template-columns: repeat(2, 1fr);
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
     }
 }

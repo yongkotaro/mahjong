@@ -1,3 +1,18 @@
-.email:hover {
-    color: #000;
+.socials {
+    color: #38b2ac;
+}
+
+.icon-container {
+    padding: 0.5rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    margin: 0 0.5rem;
+    font-size: 1.5rem;
+}
+
+.email:hover,
+.github:hover,
+.linkedin:hover {
+    color: white;
 }

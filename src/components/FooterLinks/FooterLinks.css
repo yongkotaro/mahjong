@@ -1,0 +1,26 @@
+a {
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1.25rem;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.footer-links-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 2rem 0;
+    align-items: center;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .footer-links-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
