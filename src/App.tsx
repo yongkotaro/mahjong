@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Home, Links, About, Terms, Header, Footer } from './containers';
+import { Home, About, Terms, Header, Footer } from './containers';
 
 
 const App: React.FC = () => {
@@ -10,7 +10,6 @@ const App: React.FC = () => {
       <Header />
       <About />
       <Home />
-      <Links />
       <Terms />
       <Footer />
     </div>
