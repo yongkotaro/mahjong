@@ -13,16 +13,22 @@ export const Hero = () => {
             <p className='hero-paragraph'>Become the next mahjong legend</p>
             <div className='hero-visuals'>
                 <div className="hero-display">
-                    <img className="hero-image" src={about_image} />
-                    <video
-                        autoPlay
-                        loop
-                        muted
-                        className="hero-video"
-                    >
-                        <source src={video1} type="video/mp4" />
-                        Your browser does not support the video tag.
-                    </video>
+                    <div className='image-wrapper'>
+                        <img className="hero-image" src={about_image} />
+                        <span className='image-text'>Without TileWaiter </span>
+                    </div>
+                    <div className='image-wrapper'>
+                        <video
+                            autoPlay
+                            loop
+                            muted
+                            className="hero-video"
+                        >
+                            <source src={video1} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                        <span className='image-text'>With TileWaiter </span>
+                    </div>
                 </div>
                 <div className='hero-buttons'>
                     <Button variant='contained' className='start-button' href='#home'>Try Now</Button>
