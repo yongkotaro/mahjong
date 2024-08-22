@@ -1,4 +1,4 @@
-a {
+.footer-link {
     margin-bottom: 0.25rem;
     font-weight: 500;
     cursor: pointer;
@@ -6,7 +6,7 @@ a {
     font-size: 1.25rem;
 }
 
-a:hover {
+.footer-link:hover {
     text-decoration: underline;
 }
 
