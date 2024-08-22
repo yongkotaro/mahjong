@@ -15,7 +15,7 @@ export const Hero = () => {
                 <div className="hero-display">
                     <div className='image-wrapper'>
                         <img className="hero-image" src={about_image} />
-                        <span className='image-text'>Without TileWaiter </span>
+                        <span className='image-text'>[Without TileWaiter]</span>
                     </div>
                     <div className='image-wrapper'>
                         <video
@@ -27,7 +27,7 @@ export const Hero = () => {
                             <source src={video1} type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
-                        <span className='image-text'>With TileWaiter </span>
+                        <span className='image-text'>[With TileWaiter] </span>
                     </div>
                 </div>
                 <div className='hero-buttons'>

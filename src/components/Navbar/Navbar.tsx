@@ -34,7 +34,7 @@ export const Navbar: React.FC = () => {
       </div>
       <ul ref={menuRef} className={menuOpen ? "open" : "close"}>
         <li className='nav-item'>
-          <a href='#about' onClick={closeMenu}>About</a>
+          <a href='#highlights' onClick={closeMenu}>Highlights</a>
         </li>
         <li className='nav-item'>
           <a href='#home' onClick={closeMenu}>Home</a>

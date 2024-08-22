@@ -1,0 +1,77 @@
+.highlights-container {
+    padding: 2rem;
+    position: relative;
+    top: -50px;
+    background-color: white;
+    border-radius: 50px 50px 0 0;
+    font-family: 'Poppins';
+}
+
+.highlights-text {
+    text-align: center;
+}
+
+.highlights-badge {
+    color: #1a202c;
+    height: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+}
+
+.highlights-heading {
+    font-size: 1.875rem;
+    margin-top: 2.5rem;
+}
+
+.feature-highlight {
+    background: linear-gradient(to right, #a0aec0, #758fb1);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.highlights-list {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    justify-content: center;
+}
+
+.highlights-icon-wrapper {
+    display: flex;
+}
+
+.highlights-icon {
+    flex: 0 0 40px;
+    margin: 0 1.5rem;
+    height: 40px;
+    width: 40px;
+    padding: 0.1rem;
+    background-color: #111;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 9999px;
+}
+
+.highlights-title {
+    margin-top: 0.5rem;
+    font-size: 1.25rem;
+}
+
+.highlights-description {
+    font-size: 1rem;
+    padding: 0.25rem;
+    margin-bottom: 2rem;
+    color: #71717a;
+}
+
+
+@media screen and (max-width: 768px) {
+    .highlights-list {
+        flex-direction: column;
+    }
+}

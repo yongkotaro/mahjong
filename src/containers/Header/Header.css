@@ -1,11 +1,12 @@
-.container {
-    background-color: rgba(255, 255, 255, 0.5);
+.header-container {
+    background-color: rgba(0, 0, 0, 0.5);
     height: 90vh;
     width: 100%;
     z-index: 1;
+    padding-bottom: 5rem;
 }
 
-.container:before {
+.header-container:before {
     content: '';
     background: url('../../assets/hero.jpg') center center/cover;
     opacity: 0.4;
@@ -13,12 +14,13 @@
     width: 100%;
     position: absolute;
     z-index: -1;
+    padding-bottom: 5rem;
 }
 
 @media (max-width: 768px) {
 
-    .container,
-    .container:before {
-        height: 80vh;
+    .header-container,
+    .header-container:before {
+        height: 60vh;
     }
 }

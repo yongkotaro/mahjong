@@ -3,10 +3,12 @@
     flex-direction: column;
     padding-top: 5rem;
     font-family: 'Poppins';
+    color: white;
 }
 
 .slogan {
     font-size: 3rem;
+    font-weight: 600;
     margin-bottom: 1rem;
     text-align: center;
     z-index: 1;
@@ -56,11 +58,10 @@
 .image-text {
     position: absolute;
     bottom: 5%;
-    color: white;
     left: 0;
     right: 0;
     text-align: center;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 1.5rem;
 }
 
