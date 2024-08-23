@@ -1,14 +1,17 @@
 import React from 'react';
 import './App.css';
-import { Home, Highlights, Terms, Header, Footer } from './containers';
+import { Home, Highlights, Header, Footer, MoreSection } from './containers';
 import { createTheme, StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
-import { Divider, Chip } from '@mui/material';
 
 const theme = createTheme({
   palette: {
     primary: {
       main: '#1a202c',
     },
+  },
+
+  typography: {
+    fontFamily: 'Poppins',
   },
 });
 
@@ -21,7 +24,7 @@ const App: React.FC = () => {
           <Header />
           <Highlights />
           <Home />
-          <Terms />
+          <MoreSection />
           <Footer />
         </ThemeProvider>
       </StyledEngineProvider>

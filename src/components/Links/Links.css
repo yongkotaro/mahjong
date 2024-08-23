@@ -1,0 +1,44 @@
+body {
+    font-family: 'Poppins';
+}
+
+.links-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.links-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.links-list {
+    list-style-type: disc;
+    padding-left: 40px;
+}
+
+.links-list-item {
+    font-size: 1.1em;
+    line-height: 1.8;
+    /* Improved readability */
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.link {
+    color: #0066cc;
+    text-decoration: none;
+    margin-left: 5px;
+    /* Space between text and anchor */
+}
+
+.link:hover {
+    text-decoration: underline;
+    color: #004080;
+}

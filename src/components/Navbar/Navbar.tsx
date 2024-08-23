@@ -40,7 +40,7 @@ export const Navbar: React.FC = () => {
           <a href='#home' onClick={closeMenu}>Home</a>
         </li>
         <li className='nav-item'>
-          <a href='#links' onClick={closeMenu}>Links</a>
+          <a href='#more' onClick={closeMenu}>More</a>
         </li>
         <li className='nav-item'>
           <a href='#contact' onClick={closeMenu}>Contact</a>
