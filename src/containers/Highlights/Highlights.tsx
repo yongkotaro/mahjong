@@ -1,6 +1,7 @@
 import React from 'react';
 import './Highlights.css';
 import { FlashOnRounded, RuleRounded, AutoAwesomeRounded } from '@mui/icons-material';
+import { Divider } from '@mui/material';
 
 const highlights = [
     {
@@ -23,13 +24,15 @@ const highlights = [
     }
 ];
 
-export const Highlights = () => {
+export const Highlights: React.FC = () => {
     return (
         <div className="highlights-container">
-            <div className="highlights-text">
-                <span className="highlights-badge">
-                    HIGHLIGHT
+            <Divider variant='middle' sx={{ padding: '40px 0' }}>
+                <span className="divider-text">
+                    HIGHLIGHTS
                 </span>
+            </Divider>
+            <div className="highlights-text">
                 <h2 className="highlights-heading">
                     Upgrade your {" "}
                     <span className="feature-highlight">
@@ -57,4 +60,3 @@ export const Highlights = () => {
         </div>
     );
 };
-

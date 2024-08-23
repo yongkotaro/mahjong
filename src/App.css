@@ -1,4 +1,14 @@
 .App {
   height: 100vh;
   width: 100%;
+
+}
+
+.divider-text {
+  font-family: 'Poppins';
+  color: #1a202c;
+  height: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 0 1rem;
 }

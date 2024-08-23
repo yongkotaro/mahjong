@@ -11,14 +11,6 @@
     text-align: center;
 }
 
-.highlights-badge {
-    color: #1a202c;
-    height: 1.5rem;
-    font-size: 1.5rem;
-    font-weight: 500;
-    padding: 0.25rem 0.5rem;
-}
-
 .highlights-heading {
     font-size: 1.875rem;
     margin-top: 2.5rem;
@@ -49,7 +41,7 @@
     height: 40px;
     width: 40px;
     padding: 0.1rem;
-    background-color: #111;
+    background-color: #1a202c;
     color: white;
     display: flex;
     justify-content: center;

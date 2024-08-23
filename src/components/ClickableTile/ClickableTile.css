@@ -1,8 +1,17 @@
 .clickable-tile {
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
   cursor: pointer;
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
+  margin: 0 -5px;
+}
+
+.clickable-tile.initial-slide-in {
+  animation: slideIn 0.5s ease;
+}
+
+.clickable-tile.removing {
+  animation: slideOut 0.5s;
 }
 
 .clickable-tile:hover {
@@ -13,9 +22,33 @@
   transform: scale(0.9);
 }
 
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .clickable-tile {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
   }
 }
