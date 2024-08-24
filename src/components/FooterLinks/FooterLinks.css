@@ -2,9 +2,12 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     padding-top: 2rem;
-    text-align: center;
     font-size: 1.5rem;
     font-family: 'Poppins';
+}
+
+.footer-list {
+    text-align: center;
 }
 
 .footer-list span {

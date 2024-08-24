@@ -3,7 +3,7 @@
     height: 90vh;
     width: 100%;
     z-index: 1;
-    padding-bottom: 5rem;
+    padding-bottom: 10rem;
 }
 
 .header-container:before {
@@ -14,7 +14,7 @@
     width: 100%;
     position: absolute;
     z-index: -1;
-    padding-bottom: 5rem;
+    padding-bottom: 10rem;
 }
 
 @media (max-width: 768px) {
