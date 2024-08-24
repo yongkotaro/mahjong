@@ -26,12 +26,14 @@ const highlights = [
 
 export const Highlights: React.FC = () => {
     return (
-        <div className="highlights-container">
-            <Divider variant='middle' sx={{ padding: '40px 0' }}>
-                <span className="divider-text">
-                    HIGHLIGHTS
-                </span>
-            </Divider>
+        <div className="highlights-container" id='highlights'>
+            <div className="highlights-divider">
+                <Divider variant='middle' sx={{ padding: '40px 0', width: '70%', margin: 'auto' }}>
+                    <span className="divider-text">
+                        HIGHLIGHTS
+                    </span>
+                </Divider>
+            </div>
             <div className="highlights-text">
                 <h2 className="highlights-heading">
                     Upgrade your {" "}

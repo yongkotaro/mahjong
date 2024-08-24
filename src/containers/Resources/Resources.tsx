@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './MoreSection.css';
+import './Resources.css';
 import { Terms, Links } from '../../components';
 import { Divider } from '@mui/material';
 
@@ -7,10 +7,10 @@ export const MoreSection: React.FC = () => {
     const [activeTab, setActiveTab] = useState<'terms' | 'links'>('terms');
 
     return (
-        <div className="tabbed-section">
+        <div className="tabbed-section" id='more'>
             <Divider variant='middle' sx={{ padding: '40px 0' }}>
                 <span className="divider-text">
-                    MORE
+                    RESOURCES
                 </span>
             </Divider>
             <div className="tab-header">

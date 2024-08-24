@@ -1,26 +1,39 @@
+.footer-links-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-top: 2rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: 'Poppins';
+}
+
+.footer-list span {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.link-item {
+    margin-bottom: 0.5rem;
+}
+
 .footer-link {
-    margin-bottom: 0.25rem;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 1.25rem;
+    color: #9ca3af;
+    font-size: 0.9rem;
+    transition: color 0.3s;
 }
 
 .footer-link:hover {
-    text-decoration: underline;
-}
-
-.footer-links-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    padding: 2rem 0;
-    align-items: center;
-    text-align: center;
+    color: #14b8a6;
 }
 
 @media (max-width: 768px) {
     .footer-links-container {
         grid-template-columns: 1fr;
         gap: 1rem;
+    }
+
+    .footer-list span {
+        font-size: 1.2rem;
     }
 }

@@ -8,18 +8,35 @@ nav {
     top: 10px;
     left: 50%;
     transform: translate(-50%, 0);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgb(255, 255, 255, 0.2);
     border-radius: 30px;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
     width: 80%;
     max-width: 1000px;
     z-index: 100;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease, border-radius 0.3s ease;
+}
+
+nav.over-highlights {
+    color: #1a202c;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+nav.over-highlights .menu-icon,
+nav.over-highlights ul li a {
+    color: black;
+}
+
+.logo-image {
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 nav ul {
     display: flex;
     margin-left: auto;
+    backdrop-filter: blur(10px);
+    z-index: 100;
 }
 
 nav ul li a {
@@ -31,10 +48,11 @@ nav ul li a {
     font-family: 'Poppins';
     font-weight: 300;
     font-style: normal;
+    transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-    background: hsla(240, 3%, 94%, 0.5);
+    text-decoration: underline;
 }
 
 .logo img {
@@ -44,8 +62,8 @@ nav ul li a:hover {
 
 .menu-icon {
     display: none;
-    transition: transform 0.3s ease;
-    color: black;
+    color: white;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 @media (max-width: 768px) {
@@ -53,19 +71,23 @@ nav ul li a:hover {
         padding: 5px 2%;
         max-width: 100%;
         align-items: center;
-        transition: border-radius 300ms ease;
     }
 
     nav.open {
         border-radius: 30px 30px 0 0;
+        backdrop-filter: none;
+        background-color: rgba(137, 135, 135, 0.95);
     }
 
+    nav.open.over-highlights {
+        background-color: white;
+    }
 
     .menu-icon {
         display: block;
         margin-left: auto;
         cursor: pointer;
-        transition: transform 0.3s ease;
+        transition: transform 0.3s ease, color 0.3s ease;
     }
 
     .menu-icon.open {
@@ -73,41 +95,30 @@ nav ul li a:hover {
     }
 
     nav ul {
-        display: flex;
         flex-direction: column;
         width: 100%;
         padding: 0;
         position: absolute;
         top: 40px;
         left: 0;
-        background: rgba(255, 255, 255, 1);
         border-radius: 0 0 30px 30px;
-        backdrop-filter: blur(5px);
         text-align: center;
-        opacity: 0;
         transform: scaleY(0);
-        /* Start with zero scale on Y-axis */
         transform-origin: top;
-        /* Scale from the top */
-        transition: opacity 300ms ease, transform 300ms ease;
+        transition: opacity 0.3s ease, transform 0.3s ease;
         pointer-events: none;
-        /* Prevent interactions when hidden */
     }
 
     nav ul.open {
         opacity: 1;
         transform: scaleY(1);
-        /* Scale to full height */
         pointer-events: auto;
-        /* Allow interactions when visible */
     }
 
     nav ul.close {
         opacity: 0;
         transform: scaleY(0);
-        /* Scale back to zero height */
         pointer-events: none;
-        /* Prevent interactions when hidden */
     }
 
     nav ul li a {

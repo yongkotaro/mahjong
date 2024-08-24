@@ -3,7 +3,7 @@ import './Links.css';
 
 export const Links: React.FC = () => {
     return (
-        <div className="links-container">
+        <div className="links-container" id='links'>
             <h1 className="links-title">Resources and Acknowledgments</h1>
             <ul className="links-list">
                 <li className="links-list-item">

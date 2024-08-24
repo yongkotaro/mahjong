@@ -1,10 +1,9 @@
 import React from 'react';
 import './Terms.css';
-import { Divider } from '@mui/material';
 
 export const Terms: React.FC = () => {
     return (
-        <div className="terms-container">
+        <div className="terms-container" id='terms'>
             <h1 className="terms-title">Terms and Conditions</h1>
 
             <p className="terms-paragraph">

@@ -20,6 +20,7 @@
 .winning-tiles {
   display: flex;
   flex-direction: row;
+  padding-top: 2rem;
   justify-content: center;
 }
 
@@ -30,4 +31,22 @@
 .winning-tiles .clickable-tile:hover,
 .clickable-tile.clicked {
   transform: none;
+}
+
+.winning-tiles h2 {
+  margin-left: 10px;
+}
+
+.slide-in {
+  animation: slideIn 0.5s forwards;
+}
+
+.slide-out {
+  animation: slideOut 0.5s forwards;
+}
+
+@media (max-width: 768px) {
+  .winning-tiles {
+    font-size: 0.75rem;
+  }
 }
