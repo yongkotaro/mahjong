@@ -6,10 +6,8 @@
 
 To run the project locally, follow these steps:
 
-    ```
     npm install
     npm start
-    ```
 
 The application will start and can be accessed at `http://localhost:3000` (or the port specified in your configuration).
 
