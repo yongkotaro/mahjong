@@ -1,67 +1,5 @@
 import { TileInfo, TileStats, TileStatsMap, extractImageInfo, updateTileStatsMap, hasMan, hasBamboo, hasHonor, hasPin, mans, pins, bamboos, honors } from "./parseTiles";
 
-export const winningTiles = (userHand: string[]): string[] => {
-    const winningTiles: string[] = [];
-    const tiles = updateTileStatsMap(userHand.map(extractImageInfo), {});
-
-    const checkSuit = (suit: string, suitTiles: TileInfo[]) => {
-        suitTiles.forEach(tile => {
-            const key = `${suit}${tile.number}`;
-            const fullHand = JSON.parse(JSON.stringify(tiles)); // Deep copy of tiles for each iteration
-
-            // Initialize tile if it does not exist
-            if (!fullHand[key]) {
-                fullHand[key] = {
-                    src: tile.src,
-                    suit: tile.suit,
-                    number: tile.number,
-                    maxCount: 4,
-                    count: 0,
-                    isSpecial: false
-                };
-            }
-
-            if (fullHand[key].count < fullHand[key].maxCount) {
-                fullHand[key].count++;
-                if (isCompleteHand(fullHand)) {
-                    winningTiles.push(tile.src);
-                }
-            }
-        });
-    };
-
-    if (hasPin) checkSuit("pin", pins);
-    if (hasMan) checkSuit("man", mans);
-    if (hasBamboo) checkSuit("bamboo", bamboos);
-    if (hasHonor) {
-        honors.forEach(honor => {
-            const key = `${honor.suit}`;
-            const fullHand = JSON.parse(JSON.stringify(tiles)); // Deep copy of tiles for each iteration
-
-            // Initialize tile if it does not exist
-            if (!fullHand[key]) {
-                fullHand[key] = {
-                    src: honor.src,
-                    suit: honor.suit,
-                    number: honor.number,
-                    maxCount: 3,
-                    count: 0,
-                    isSpecial: true
-                };
-            }
-
-            if (fullHand[key].count < fullHand[key].maxCount) {
-                fullHand[key].count++;
-                if (isCompleteHand(fullHand)) {
-                    winningTiles.push(honor.src);
-                }
-            }
-        });
-    }
-
-    return winningTiles;
-};
-
 const isPair = (tile: TileStats): boolean => tile.count >= 2;
 
 const isPung = (tile: TileStats): boolean => tile.count >= 3;
@@ -130,4 +68,66 @@ export const isCompleteHand = (tileStatsMap: TileStatsMap): boolean => {
         }
     }
     return false;
+};
+
+export const winningTiles = (userHand: string[]): string[] => {
+    const winningTiles: string[] = [];
+    const tiles = updateTileStatsMap(userHand.map(extractImageInfo), {});
+
+    const checkSuit = (suit: string, suitTiles: TileInfo[]) => {
+        suitTiles.forEach(tile => {
+            const key = `${suit}${tile.number}`;
+            const fullHand = JSON.parse(JSON.stringify(tiles)); // Deep copy of tiles for each iteration
+
+            // Initialize tile if it does not exist
+            if (!fullHand[key]) {
+                fullHand[key] = {
+                    src: tile.src,
+                    suit: tile.suit,
+                    number: tile.number,
+                    maxCount: 4,
+                    count: 0,
+                    isSpecial: false
+                };
+            }
+
+            if (fullHand[key].count < fullHand[key].maxCount) {
+                fullHand[key].count++;
+                if (isCompleteHand(fullHand)) {
+                    winningTiles.push(tile.src);
+                }
+            }
+        });
+    };
+
+    if (hasPin) checkSuit("pin", pins);
+    if (hasMan) checkSuit("man", mans);
+    if (hasBamboo) checkSuit("bamboo", bamboos);
+    if (hasHonor) {
+        honors.forEach(honor => {
+            const key = `${honor.suit}`;
+            const fullHand = JSON.parse(JSON.stringify(tiles)); // Deep copy of tiles for each iteration
+
+            // Initialize tile if it does not exist
+            if (!fullHand[key]) {
+                fullHand[key] = {
+                    src: honor.src,
+                    suit: honor.suit,
+                    number: honor.number,
+                    maxCount: 3,
+                    count: 0,
+                    isSpecial: true
+                };
+            }
+
+            if (fullHand[key].count < fullHand[key].maxCount) {
+                fullHand[key].count++;
+                if (isCompleteHand(fullHand)) {
+                    winningTiles.push(honor.src);
+                }
+            }
+        });
+    }
+
+    return winningTiles;
 };
