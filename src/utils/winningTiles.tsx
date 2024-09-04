@@ -1,4 +1,4 @@
-import { TileInfo, TileStats, TileStatsMap, extractImageInfo, updateTileStatsMap, hasMan, hasBamboo, hasHonor, hasPin, mans, pins, bamboos, honors } from "./parseTiles";
+import { TileInfo, TileStats, TileStatsMap, extractImageInfo, updateTileStatsMap, hasMan, hasBamboo, hasHonor, hasPin, mans, pins, bamboos, honors, thirteenOrphans } from "./parseTiles";
 
 const isPair = (tile: TileStats): boolean => tile.count >= 2;
 
@@ -25,7 +25,7 @@ const removeTiles = (tileStatsMap: TileStatsMap, tilesToRemove: { [key: string]:
     return newTileStatsMap;
 };
 
-// Sorting function for tile entries
+// Sorting function for tile entries when tiles are added during isCompleteHand
 const sortTiles = (tileEntries: [string, TileStats][]): [string, TileStats][] => {
     return tileEntries.sort(([keyA, tileA], [keyB, tileB]) => {
         if (tileA.suit === tileB.suit) {
@@ -37,7 +37,7 @@ const sortTiles = (tileEntries: [string, TileStats][]): [string, TileStats][] =>
 
 const checkMelds = (tileStatsMap: TileStatsMap): boolean => {
     const tileEntries = Object.entries(tileStatsMap).filter(([_, stats]) => stats.count > 0);
-    const sortedTileEntries = sortTiles(tileEntries); // Sort tile entries
+    const sortedTileEntries = sortTiles(tileEntries);
     if (sortedTileEntries.length === 0) return true;
 
     for (let i = 0; i < sortedTileEntries.length; i++) {
@@ -59,7 +59,7 @@ const checkMelds = (tileStatsMap: TileStatsMap): boolean => {
     return false;
 };
 
-export const isCompleteHand = (tileStatsMap: TileStatsMap): boolean => {
+const isCompleteHand = (tileStatsMap: TileStatsMap): boolean => {
     const tileEntries = Object.entries(tileStatsMap);
     for (const [key, tile] of tileEntries) {
         if (isPair(tile)) {
@@ -68,6 +68,24 @@ export const isCompleteHand = (tileStatsMap: TileStatsMap): boolean => {
         }
     }
     return false;
+};
+
+const isThirteenOrphans = (userHand: TileStatsMap): boolean => {
+    const orphans = ["pin1", "pin9", "man1", "man9", "bamboo1", "bamboo9", "dong", "nan", "xi", "bei", "baiban", "qing", "hong"];
+    let pairFound = false;
+
+    for (const tile of orphans) {
+        if (!userHand[tile] || userHand[tile].count === 0) {
+            return false; // Missing one of the required tiles
+        }
+        if (userHand[tile].count > 1) {
+            if (pairFound) {
+                return false; // More than one pair found
+            }
+            pairFound = true;
+        }
+    }
+    return pairFound;
 };
 
 export const winningTiles = (userHand: string[]): string[] => {
@@ -99,6 +117,56 @@ export const winningTiles = (userHand: string[]): string[] => {
             }
         });
     };
+
+    // Check for thirteen orphans
+    thirteenOrphans.forEach(orphan => {
+        if (orphan.isSpecial) {
+            const key = `${orphan.suit}`;
+            const fullHand = JSON.parse(JSON.stringify(tiles));
+
+
+            if (!fullHand[key]) {
+                fullHand[key] = {
+                    src: orphan.src,
+                    suit: orphan.suit,
+                    number: orphan.number,
+                    maxCount: 3,
+                    count: 0,
+                    isSpecial: true
+                };
+            }
+
+            if (fullHand[key].count < fullHand[key].maxCount) {
+                fullHand[key].count++;
+                if (isThirteenOrphans(fullHand)) {
+                    winningTiles.push(orphan.src);
+                }
+            }
+
+        } else {
+            const key = `${orphan.suit}${orphan.number}`;
+            const fullHand = JSON.parse(JSON.stringify(tiles));
+
+            if (!fullHand[key]) {
+                fullHand[key] = {
+                    src: orphan.src,
+                    suit: orphan.suit,
+                    number: orphan.number,
+                    maxCount: 4,
+                    count: 0,
+                    isSpecial: false
+                };
+            }
+
+            if (fullHand[key].count < fullHand[key].maxCount) {
+                fullHand[key].count++;
+                if (isThirteenOrphans(fullHand)) {
+                    winningTiles.push(orphan.src);
+                }
+            }
+        }
+    });
+
 
     if (hasPin) checkSuit("pin", pins);
     if (hasMan) checkSuit("man", mans);

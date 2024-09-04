@@ -100,3 +100,12 @@ export const honors: TileInfo[] = honorImages.map(extractImageInfo);
 export const bamboos: TileInfo[] = bambooImages.map(extractImageInfo);
 export const mans: TileInfo[] = manImages.map(extractImageInfo);
 export const pins: TileInfo[] = pinImages.map(extractImageInfo);
+export const thirteenOrphans: TileInfo[] = [
+  { src: bambooImages[0], suit: 'bamboo', number: 1, isSpecial: false },
+  { src: bambooImages[8], suit: 'bamboo', number: 9, isSpecial: false },
+  { src: manImages[0], suit: 'man', number: 1, isSpecial: false },
+  { src: manImages[8], suit: 'man', number: 9, isSpecial: false },
+  { src: pinImages[0], suit: 'pin', number: 1, isSpecial: false },
+  { src: pinImages[8], suit: 'pin', number: 9, isSpecial: false },
+  ...honors,
+];
