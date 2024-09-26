@@ -13,7 +13,7 @@ The application will start and can be accessed at `http://localhost:3000` (or th
 
 ## Deployment
 
-The application is hosted and can be accessed online at: [https://tilewaiter.netlify.app/](https://tilewaiter.netlify.app/)
+The application is hosted and can be accessed online at: [https://tilewaiter.vercel.app/](https://tilewaiter.vercel.app/)
 
 ## License
 
