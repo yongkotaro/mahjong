@@ -1,5 +1,5 @@
 import React from 'react';
-import { sortImages, extractImageInfo } from '../../utils';
+import { sortTiles, extractImageInfo } from '../../utils';
 import { KeyboardRow } from '../../components/';
 import { honorImages, manImages, pinImages, bambooImages } from '../../tiles';
 import './Keyboard.css';
@@ -34,7 +34,7 @@ export const Keyboard: React.FC<KeyboardProps> = ({
                 }
             }
 
-            const sortedImages = sortImages(newPlaceholderImages);
+            const sortedImages = sortTiles(newPlaceholderImages);
             setPlaceholderImages(sortedImages);
 
             if (newPlaceholderImages.length === lengthOfTiles) {

@@ -31,10 +31,6 @@ export const Hero = () => {
                         <span className='image-text'>[With TileWaiter] </span>
                     </div>
                 </div>
-                <div className='hero-buttons'>
-                    <Button variant='outlined' className='start-button' startIcon={<Construction />} href='#home'>Try Now</Button>
-                    <Button variant='outlined' className='doc-button' startIcon={<GitHub />} onClick={() => window.open('https://github.com/yongkotaro/mahjong')}>Git Repo</Button>
-                </div>
             </div>
         </div>
     )

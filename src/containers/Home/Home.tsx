@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { PlaceholderRow, Keyboard, KeyboardButtons } from '../../components/';
 import { winningTiles } from '../../utils';
 import { Divider } from '@mui/material';

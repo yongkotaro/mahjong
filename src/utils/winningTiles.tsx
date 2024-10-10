@@ -1,10 +1,10 @@
-import { TileInfo, TileStats, TileStatsMap, extractImageInfo, updateTileStatsMap, hasMan, hasBamboo, hasHonor, hasPin, mans, pins, bamboos, honors, thirteenOrphans } from "./parseTiles";
+import * as TileUtils from "./parseTiles";
 
-const isPair = (tile: TileStats): boolean => tile.count >= 2;
+const isPair = (tile: TileUtils.TileStats): boolean => tile.count >= 2;
 
-const isPung = (tile: TileStats): boolean => tile.count >= 3;
+const isPung = (tile: TileUtils.TileStats): boolean => tile.count >= 3;
 
-const isChow = (tiles: TileStats[], index: number): boolean => {
+const isChow = (tiles: TileUtils.TileStats[], index: number): boolean => {
     if (index + 2 >= tiles.length) return false;
     if (tiles[index].isSpecial) return false;
     const first = tiles[index];
@@ -15,8 +15,8 @@ const isChow = (tiles: TileStats[], index: number): boolean => {
         first.number + 1 === second.number && second.number + 1 === third.number;
 };
 
-const removeTiles = (tileStatsMap: TileStatsMap, tilesToRemove: { [key: string]: number }): TileStatsMap => {
-    const newTileStatsMap: TileStatsMap = JSON.parse(JSON.stringify(tileStatsMap)); // Deep copy
+const removeTiles = (tileStatsMap: TileUtils.TileStatsMap, tilesToRemove: { [key: string]: number }): TileUtils.TileStatsMap => {
+    const newTileStatsMap: TileUtils.TileStatsMap = JSON.parse(JSON.stringify(tileStatsMap)); // Deep copy
     for (const key in tilesToRemove) {
         if (newTileStatsMap[key]) {
             newTileStatsMap[key].count -= tilesToRemove[key];
@@ -26,7 +26,7 @@ const removeTiles = (tileStatsMap: TileStatsMap, tilesToRemove: { [key: string]:
 };
 
 // Sorting function for tile entries when tiles are added during isCompleteHand
-const sortTiles = (tileEntries: [string, TileStats][]): [string, TileStats][] => {
+const sortTiles = (tileEntries: [string, TileUtils.TileStats][]): [string, TileUtils.TileStats][] => {
     return tileEntries.sort(([keyA, tileA], [keyB, tileB]) => {
         if (tileA.suit === tileB.suit) {
             return tileA.number - tileB.number;
@@ -35,7 +35,7 @@ const sortTiles = (tileEntries: [string, TileStats][]): [string, TileStats][] =>
     });
 };
 
-const checkMelds = (tileStatsMap: TileStatsMap): boolean => {
+const checkMelds = (tileStatsMap: TileUtils.TileStatsMap): boolean => {
     const tileEntries = Object.entries(tileStatsMap).filter(([_, stats]) => stats.count > 0);
     const sortedTileEntries = sortTiles(tileEntries);
     if (sortedTileEntries.length === 0) return true;
@@ -59,7 +59,7 @@ const checkMelds = (tileStatsMap: TileStatsMap): boolean => {
     return false;
 };
 
-const isCompleteHand = (tileStatsMap: TileStatsMap): boolean => {
+const isCompleteHand = (tileStatsMap: TileUtils.TileStatsMap): boolean => {
     const tileEntries = Object.entries(tileStatsMap);
     for (const [key, tile] of tileEntries) {
         if (isPair(tile)) {
@@ -70,7 +70,7 @@ const isCompleteHand = (tileStatsMap: TileStatsMap): boolean => {
     return false;
 };
 
-const isThirteenOrphans = (userHand: TileStatsMap): boolean => {
+const isThirteenOrphans = (userHand: TileUtils.TileStatsMap): boolean => {
     const orphans = ["pin1", "pin9", "man1", "man9", "bamboo1", "bamboo9", "dong", "nan", "xi", "bei", "baiban", "qing", "hong"];
     let pairFound = false;
 
@@ -90,9 +90,9 @@ const isThirteenOrphans = (userHand: TileStatsMap): boolean => {
 
 export const winningTiles = (userHand: string[]): string[] => {
     const winningTiles: string[] = [];
-    const tiles = updateTileStatsMap(userHand.map(extractImageInfo), {});
+    const tiles = TileUtils.updateTileStatsMap(userHand.map(TileUtils.extractImageInfo), {});
 
-    const checkSuit = (suit: string, suitTiles: TileInfo[]) => {
+    const checkSuit = (suit: string, suitTiles: TileUtils.TileInfo[]) => {
         suitTiles.forEach(tile => {
             const key = `${suit}${tile.number}`;
             const fullHand = JSON.parse(JSON.stringify(tiles)); // Deep copy of tiles for each iteration
@@ -119,7 +119,7 @@ export const winningTiles = (userHand: string[]): string[] => {
     };
 
     // Check for thirteen orphans
-    thirteenOrphans.forEach(orphan => {
+    TileUtils.thirteenOrphans.forEach(orphan => {
         if (orphan.isSpecial) {
             const key = `${orphan.suit}`;
             const fullHand = JSON.parse(JSON.stringify(tiles));
@@ -168,11 +168,11 @@ export const winningTiles = (userHand: string[]): string[] => {
     });
 
 
-    if (hasPin) checkSuit("pin", pins);
-    if (hasMan) checkSuit("man", mans);
-    if (hasBamboo) checkSuit("bamboo", bamboos);
-    if (hasHonor) {
-        honors.forEach(honor => {
+    if (TileUtils.hasPin) checkSuit("pin", TileUtils.pins);
+    if (TileUtils.hasMan) checkSuit("man", TileUtils.mans);
+    if (TileUtils.hasBamboo) checkSuit("bamboo", TileUtils.bamboos);
+    if (TileUtils.hasHonor) {
+        TileUtils.honors.forEach(honor => {
             const key = `${honor.suit}`;
             const fullHand = JSON.parse(JSON.stringify(tiles)); // Deep copy of tiles for each iteration
 
