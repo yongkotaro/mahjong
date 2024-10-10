@@ -34,6 +34,7 @@ nav.over-highlights ul li a {
 
 nav ul {
     display: flex;
+    margin-left: auto;
     backdrop-filter: blur(10px);
     z-index: 100;
 }
