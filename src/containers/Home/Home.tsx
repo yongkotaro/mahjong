@@ -32,7 +32,9 @@ export const Home: React.FC = () => {
           TILEWAITER
         </span>
       </Divider>
-      <PlaceholderRow images={placeholderImages} onTileClick={handleImageRemove} slideUp={slideUp} />
+      <div className="placeholder-row-container">
+        <PlaceholderRow images={placeholderImages} onTileClick={handleImageRemove} slideUp={slideUp} />
+      </div>
       <KeyboardButtons
         placeholderImages={placeholderImages}
         setPlaceholderImages={setPlaceholderImages}

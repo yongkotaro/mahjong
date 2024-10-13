@@ -1,9 +1,9 @@
 .header-container {
     background-color: rgba(0, 0, 0, 0.5);
-    height: 90vh;
+    height: 80vh;
     width: 100%;
     z-index: 1;
-    padding-bottom: 10rem;
+    padding-bottom: 5rem;
 }
 
 .header-container:before {
@@ -21,6 +21,6 @@
 
     .header-container,
     .header-container:before {
-        height: 60vh;
+        height: 55vh;
     }
 }
