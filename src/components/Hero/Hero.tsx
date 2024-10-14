@@ -1,8 +1,5 @@
-import React from 'react'
 import './Hero.css'
 import { curve, about_image, video1 } from '../../assets';
-import { Button } from '@mui/material';
-import { GitHub, Construction } from '@mui/icons-material';
 
 export const Hero = () => {
     return (
