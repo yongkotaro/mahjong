@@ -2,7 +2,7 @@
   "name": "tilewaiter",
   "version": "0.1.0",
   "private": true,
-  "type": "module",                      
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -22,14 +22,14 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.98",
-    "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
-    "@vitejs/plugin-react-swc": "^3.10.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^20.19.4",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react-swc": "^3.10.2",
     "vite": "^7.0.2"
   },
   "eslintConfig": {
