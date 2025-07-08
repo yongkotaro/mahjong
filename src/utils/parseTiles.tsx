@@ -61,18 +61,8 @@ export const updateTileStatsMap = (tiles: TileInfo[], tileStatsMap: { [key: stri
 };
 
 export const extractImageInfo = (filename: string): TileInfo => {
-  // Handle baiban/white dragon first since it's a special case
-  if (filename.includes('baiban')) {
-    return {
-      src: filename,
-      suit: 'baiban',
-      number: 0,
-      isSpecial: true,
-    };
-  }
-
   // Handle other special tiles (honors)
-  const specialTiles = ['dong', 'nan', 'xi', 'bei', 'hong', 'qing'];
+  const specialTiles = ['dong', 'nan', 'xi', 'bei', 'hong', 'qing', 'bai'];
   const specialPattern = /(\w+)\.(?:[a-f0-9]*\.)?png$/;
   const specialMatch = specialPattern.exec(filename);
 

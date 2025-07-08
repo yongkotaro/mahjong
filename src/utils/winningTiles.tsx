@@ -71,7 +71,7 @@ const isCompleteHand = (tileStatsMap: TileUtils.TileStatsMap): boolean => {
 };
 
 const isThirteenOrphans = (userHand: TileUtils.TileStatsMap): boolean => {
-    const orphans = ["pin1", "pin9", "man1", "man9", "bamboo1", "bamboo9", "dong", "nan", "xi", "bei", "baiban", "qing", "hong"];
+    const orphans = ["pin1", "pin9", "man1", "man9", "bamboo1", "bamboo9", "dong", "nan", "xi", "bei", "bai", "qing", "hong"];
     let pairFound = false;
 
     for (const tile of orphans) {
