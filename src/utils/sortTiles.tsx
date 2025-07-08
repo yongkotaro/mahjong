@@ -5,7 +5,7 @@ const specialOrder = ["dong", "nan", "xi", "bei", "hong", "qing", "baiban"]
 
 export const sortTiles = (tilenames: string[]): string[] => {
   const tileInfos = tilenames.map(extractImageInfo);
-
+  console.log("Tile Infos:", tileInfos);
   tileInfos.sort((a, b) => {
     if (a.isSpecial && b.isSpecial) {
       // Keep the order of special tiles the same
@@ -23,7 +23,6 @@ export const sortTiles = (tilenames: string[]): string[] => {
 
     return a.number - b.number;
   });
-
   // Extract and return sorted filenames
   return tileInfos.map(info => info.src);
 };

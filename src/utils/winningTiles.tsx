@@ -125,16 +125,14 @@ export const winningTiles = (userHand: string[]): string[] => {
             const fullHand = JSON.parse(JSON.stringify(tiles));
 
 
-            if (!fullHand[key]) {
-                fullHand[key] = {
-                    src: orphan.src,
-                    suit: orphan.suit,
-                    number: orphan.number,
-                    maxCount: 3,
-                    count: 0,
-                    isSpecial: true
-                };
-            }
+            fullHand[key] ??= {
+                src: orphan.src,
+                suit: orphan.suit,
+                number: orphan.number,
+                maxCount: 3,
+                count: 0,
+                isSpecial: true
+            };
 
             if (fullHand[key].count < fullHand[key].maxCount) {
                 fullHand[key].count++;
@@ -147,16 +145,14 @@ export const winningTiles = (userHand: string[]): string[] => {
             const key = `${orphan.suit}${orphan.number}`;
             const fullHand = JSON.parse(JSON.stringify(tiles));
 
-            if (!fullHand[key]) {
-                fullHand[key] = {
-                    src: orphan.src,
-                    suit: orphan.suit,
-                    number: orphan.number,
-                    maxCount: 4,
-                    count: 0,
-                    isSpecial: false
-                };
-            }
+            fullHand[key] ??= {
+                src: orphan.src,
+                suit: orphan.suit,
+                number: orphan.number,
+                maxCount: 4,
+                count: 0,
+                isSpecial: false
+            };
 
             if (fullHand[key].count < fullHand[key].maxCount) {
                 fullHand[key].count++;
@@ -177,16 +173,14 @@ export const winningTiles = (userHand: string[]): string[] => {
             const fullHand = JSON.parse(JSON.stringify(tiles)); // Deep copy of tiles for each iteration
 
             // Initialize tile if it does not exist
-            if (!fullHand[key]) {
-                fullHand[key] = {
-                    src: honor.src,
-                    suit: honor.suit,
-                    number: honor.number,
-                    maxCount: 3,
-                    count: 0,
-                    isSpecial: true
-                };
-            }
+            fullHand[key] ??= {
+                src: honor.src,
+                suit: honor.suit,
+                number: honor.number,
+                maxCount: 3,
+                count: 0,
+                isSpecial: true
+            };
 
             if (fullHand[key].count < fullHand[key].maxCount) {
                 fullHand[key].count++;
@@ -196,6 +190,6 @@ export const winningTiles = (userHand: string[]): string[] => {
             }
         });
     }
-
+    console.log("Winning Tiles:", winningTiles);
     return winningTiles;
 };

@@ -61,9 +61,33 @@ export const updateTileStatsMap = (tiles: TileInfo[], tileStatsMap: { [key: stri
 };
 
 export const extractImageInfo = (filename: string): TileInfo => {
-  // Regular pattern for standard tiles
-  const regex = /(\w+)(\d+)\.[a-f0-9]{0,}\.png$/;
-  const match = filename.match(regex);
+  // Handle baiban/white dragon first since it's a special case
+  if (filename.includes('baiban')) {
+    return {
+      src: filename,
+      suit: 'baiban',
+      number: 0,
+      isSpecial: true,
+    };
+  }
+
+  // Handle other special tiles (honors)
+  const specialTiles = ['dong', 'nan', 'xi', 'bei', 'hong', 'qing'];
+  const specialPattern = /(\w+)\.(?:[a-f0-9]*\.)?png$/;
+  const specialMatch = specialPattern.exec(filename);
+
+  if (specialMatch && specialTiles.includes(specialMatch[1])) {
+    return {
+      src: filename,
+      suit: specialMatch[1],
+      number: 0,
+      isSpecial: true,
+    };
+  }
+
+  // Regular numbered tiles
+  const regex = /(\w+)(\d+)\.(?:[a-f0-9]*\.)?png$/;
+  const match = regex.exec(filename);
 
   if (match) {
     return {
@@ -74,25 +98,13 @@ export const extractImageInfo = (filename: string): TileInfo => {
     };
   }
 
-  // Handle special tiles
-  const specialPattern = /(\w+)\.[a-f0-9]{0,}\.png$/;
-  const specialMatch = filename.match(specialPattern);
-
-  if (specialMatch) {
-    return {
-      src: filename,
-      suit: specialMatch[1],
-      number: 0,
-      isSpecial: true,
-    };
-  }
-
-  // Handle baiban/white dragon
+  // Fallback for unrecognized patterns
+  console.warn(`Unrecognized tile pattern: ${filename}`);
   return {
     src: filename,
-    suit: 'baiban',
+    suit: 'unknown',
     number: 0,
-    isSpecial: true,
+    isSpecial: false,
   };
 };
 
