@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import ClickableTile from '../ClickableTile/ClickableTile';
 import './PlaceholderRow.css';
-
+import { Tile } from '../../utils';
 interface PlaceholderRowProps {
-  images: string[];
+  tiles: Tile[];
   onTileClick: (index: number) => void;
   slideUp?: boolean;
 }
 
-export const PlaceholderRow: React.FC<PlaceholderRowProps> = ({ images, onTileClick, slideUp }) => {
+export const PlaceholderRow: React.FC<PlaceholderRowProps> = ({ tiles, onTileClick, slideUp }) => {
   const [removingIndex, setRemovingIndex] = useState<number | null>(null);
 
   const handleTileClick = (index: number) => {
@@ -21,10 +21,10 @@ export const PlaceholderRow: React.FC<PlaceholderRowProps> = ({ images, onTileCl
 
   return (
     <div className={`placeholder-row ${slideUp ? 'slide-up' : ''}`}>
-      {images.map((image, index) => (
+      {tiles.map((tile, index) => (
         <ClickableTile
           key={index}
-          src={image}
+          src={tile.src}
           onClick={() => handleTileClick(index)}
           removing={removingIndex === index}  // Pass removing state
         />

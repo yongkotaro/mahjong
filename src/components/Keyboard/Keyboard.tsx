@@ -1,43 +1,41 @@
 import React from 'react';
-import { sortTiles, extractImageInfo } from '../../utils';
+import { sortTiles, Tile } from '../../utils';
 import { KeyboardRow } from '../../components/';
-import { honorImages, manImages, pinImages, bambooImages } from '../../tiles';
+import { honorTiles, manTiles, pinTiles, bambooTiles } from '../../tiles';
 import './Keyboard.css';
 
 interface KeyboardProps {
-    placeholderImages: string[];
-    setPlaceholderImages: React.Dispatch<React.SetStateAction<string[]>>;
+    placeholderTiles: Tile[];
+    setPlaceholderTiles: React.Dispatch<React.SetStateAction<Tile[]>>;
     lengthOfTiles: number;
     setConfirmEnabled: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const Keyboard: React.FC<KeyboardProps> = ({
-    placeholderImages,
-    setPlaceholderImages,
+export const Keyboard = ({
+    placeholderTiles,
+    setPlaceholderTiles,
     lengthOfTiles,
     setConfirmEnabled,
-}) => {
-    const handleTileClick = (image: string) => {
-        if (placeholderImages.length < lengthOfTiles) {
-            const newPlaceholderImages = [...placeholderImages];
-            const imageInfo = extractImageInfo(image);
+}: KeyboardProps) => {
+    const handleTileClick = (tile: Tile) => {
+        if (placeholderTiles.length < lengthOfTiles) {
+            const newTiles = [...placeholderTiles];
+            const tileCount = newTiles.filter(elem => elem == tile).length;
 
-            const imageCount = newPlaceholderImages.filter(img => img === image).length;
-
-            if (imageInfo.isSpecial) {
-                if (imageCount < 3) {
-                    newPlaceholderImages.push(image);
+            if (tile.isSpecial) {
+                if (tileCount < 3) {
+                    newTiles.push(tile);
                 }
             } else {
-                if (imageCount < 4) {
-                    newPlaceholderImages.push(image);
+                if (tileCount < 4) {
+                    newTiles.push(tile);
                 }
             }
 
-            const sortedImages = sortTiles(newPlaceholderImages);
-            setPlaceholderImages(sortedImages);
+            sortTiles(newTiles);
+            setPlaceholderTiles(newTiles);
 
-            if (newPlaceholderImages.length === lengthOfTiles) {
+            if (newTiles.length === lengthOfTiles) {
                 setConfirmEnabled(true);
             }
         }
@@ -45,10 +43,10 @@ export const Keyboard: React.FC<KeyboardProps> = ({
 
     return (
         <div className="keyboard">
-            <KeyboardRow images={pinImages} onTileClick={handleTileClick} />
-            <KeyboardRow images={bambooImages} onTileClick={handleTileClick} />
-            <KeyboardRow images={manImages} onTileClick={handleTileClick} />
-            <KeyboardRow images={honorImages} onTileClick={handleTileClick} />
+            <KeyboardRow tiles={pinTiles} onTileClick={handleTileClick} />
+            <KeyboardRow tiles={bambooTiles} onTileClick={handleTileClick} />
+            <KeyboardRow tiles={manTiles} onTileClick={handleTileClick} />
+            <KeyboardRow tiles={honorTiles} onTileClick={handleTileClick} />
         </div>
     );
 };

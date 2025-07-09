@@ -7,5 +7,16 @@ import bamboo6 from './bamboo6.png';
 import bamboo7 from './bamboo7.png';
 import bamboo8 from './bamboo8.png';
 import bamboo9 from './bamboo9.png';
+import { Tile } from '../../utils';
 
-export const bambooImages = [bamboo1, bamboo2, bamboo3, bamboo4, bamboo5, bamboo6, bamboo7, bamboo8, bamboo9];
+export const bambooTiles: Tile[] = [
+  { src: bamboo1, suit: 'bamboo', number: 1, maxCount: 4, isSpecial: false },
+  { src: bamboo2, suit: 'bamboo', number: 2, maxCount: 4, isSpecial: false },
+  { src: bamboo3, suit: 'bamboo', number: 3, maxCount: 4, isSpecial: false },
+  { src: bamboo4, suit: 'bamboo', number: 4, maxCount: 4, isSpecial: false },
+  { src: bamboo5, suit: 'bamboo', number: 5, maxCount: 4, isSpecial: false },
+  { src: bamboo6, suit: 'bamboo', number: 6, maxCount: 4, isSpecial: false },
+  { src: bamboo7, suit: 'bamboo', number: 7, maxCount: 4, isSpecial: false },
+  { src: bamboo8, suit: 'bamboo', number: 8, maxCount: 4, isSpecial: false },
+  { src: bamboo9, suit: 'bamboo', number: 9, maxCount: 4, isSpecial: false },
+];

@@ -1,20 +1,21 @@
 import React from 'react';
 import ClickableTile from '../ClickableTile/ClickableTile';
 import './KeyboardRow.css';
+import { Tile } from '../../utils';
 
 interface KeyboardRowProps {
-  images: string[];
-  onTileClick: (image: string) => void;
+  tiles: Tile[];
+  onTileClick: (tile: Tile) => void;
 }
 
-export const KeyboardRow: React.FC<KeyboardRowProps> = ({ images, onTileClick }) => {
+export const KeyboardRow: React.FC<KeyboardRowProps> = ({ tiles, onTileClick }) => {
   return (
     <div className="keyboard-row">
-      {images.map((image, index) => (
+      {tiles.map((tile, index) => (
         <ClickableTile
           key={index}
-          src={image}
-          onClick={() => onTileClick(image)}
+          src={tile.src}
+          onClick={() => onTileClick(tile)}
         />
       ))}
     </div>

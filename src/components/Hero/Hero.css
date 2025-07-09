@@ -27,14 +27,6 @@
     margin-bottom: 1.5rem;
 }
 
-.curve {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    margin-top: -0.125rem;
-}
-
 @media (max-width: 768px) {
     .hero-text {
         padding: 4rem;

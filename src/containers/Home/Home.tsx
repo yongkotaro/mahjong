@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { PlaceholderRow, Keyboard, KeyboardButtons } from '../../components/';
-import { winningTiles } from '../../utils';
+import { winningTiles, Tile } from '../../utils';
 import { Divider } from '@mui/material';
 import './Home.css';
 
-export const Home: React.FC = () => {
-  const [placeholderImages, setPlaceholderImages] = useState<string[]>([]);
+export const Home = () => {
+  const [placeholderTiles, setPlaceholderTiles] = useState<Tile[]>([]);
   const [lengthOfTiles, setlengthOfTiles] = useState(13);
-  const [wonTiles, setWonTiles] = useState<string[]>([]);
+  const [wonTiles, setWonTiles] = useState<Tile[]>([]);
   const [confirmEnabled, setConfirmEnabled] = useState(false);
   const [confirmPressed, setConfirmPressed] = useState(false);
   const [slideUp, setSlideUp] = useState(false);
 
 
   const handleImageRemove = (index: number) => {
-    const newPlaceholderImages = [...placeholderImages];
-    newPlaceholderImages.splice(index, 1);
-    setPlaceholderImages(newPlaceholderImages);
+    const newPlaceholderTiles = [...placeholderTiles];
+    newPlaceholderTiles.splice(index, 1);
+    setPlaceholderTiles(newPlaceholderTiles);
     setConfirmEnabled(false);
     setConfirmPressed(false);
   };
@@ -33,11 +33,11 @@ export const Home: React.FC = () => {
         </span>
       </Divider>
       <div className="placeholder-row-container">
-        <PlaceholderRow images={placeholderImages} onTileClick={handleImageRemove} slideUp={slideUp} />
+        <PlaceholderRow tiles={placeholderTiles} onTileClick={handleImageRemove} slideUp={slideUp} />
       </div>
       <KeyboardButtons
-        placeholderImages={placeholderImages}
-        setPlaceholderImages={setPlaceholderImages}
+        placeholderTiles={placeholderTiles}
+        setPlaceholderTiles={setPlaceholderTiles}
         setConfirmEnabled={setConfirmEnabled}
         setConfirmPressed={setConfirmPressed}
         setWonTiles={setWonTiles}
@@ -48,15 +48,15 @@ export const Home: React.FC = () => {
         winningTiles={winningTiles}
       />
       <Keyboard
-        placeholderImages={placeholderImages}
-        setPlaceholderImages={setPlaceholderImages}
+        placeholderTiles={placeholderTiles}
+        setPlaceholderTiles={setPlaceholderTiles}
         lengthOfTiles={lengthOfTiles}
         setConfirmEnabled={setConfirmEnabled}
       />
       <div className="winning-tiles">
         <h2>Winning Tiles:</h2>
         {confirmPressed && (wonTiles.length > 0 ? (
-          <PlaceholderRow images={wonTiles} onTileClick={handleWinningTile} slideUp={slideUp} />
+          <PlaceholderRow tiles={wonTiles} onTileClick={handleWinningTile} slideUp={slideUp} />
         ) : (
           <h2 className={`no-tiles-message ${slideUp ? 'slide-out' : 'slide-in'}`}>No winning tiles!</h2>
         ))}

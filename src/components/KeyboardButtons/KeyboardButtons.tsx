@@ -3,23 +3,24 @@ import { Button } from '@mui/material';
 import Select from 'react-select';
 import { DeleteRounded, ThumbUpAltRounded } from '@mui/icons-material';
 import './KeyboardButtons.css';
+import { Tile } from '../../utils';
 
 interface KeyboardButtonsProps {
-    placeholderImages: string[];
-    setPlaceholderImages: React.Dispatch<React.SetStateAction<string[]>>;
+    placeholderTiles: Tile[];
+    setPlaceholderTiles: React.Dispatch<React.SetStateAction<Tile[]>>;
     setConfirmEnabled: React.Dispatch<React.SetStateAction<boolean>>;
     setConfirmPressed: React.Dispatch<React.SetStateAction<boolean>>;
-    setWonTiles: React.Dispatch<React.SetStateAction<string[]>>;
+    setWonTiles: React.Dispatch<React.SetStateAction<Tile[]>>;
     setSlideUp: React.Dispatch<React.SetStateAction<boolean>>;
     confirmEnabled: boolean;
     lengthOfTiles: number;
     setLengthOfTiles: React.Dispatch<React.SetStateAction<number>>;
-    winningTiles: (images: string[]) => string[];
+    winningTiles: (tiles: Tile[]) => Tile[];
 }
 
 export const KeyboardButtons: React.FC<KeyboardButtonsProps> = ({
-    placeholderImages,
-    setPlaceholderImages,
+    placeholderTiles,
+    setPlaceholderTiles,
     setConfirmEnabled,
     setConfirmPressed,
     setWonTiles,
@@ -33,20 +34,20 @@ export const KeyboardButtons: React.FC<KeyboardButtonsProps> = ({
     const handleClearClick = useCallback(() => {
         setSlideUp(true);
         setTimeout(() => {
-            setPlaceholderImages([]);
+            setPlaceholderTiles([]);
             setWonTiles([]);
             setConfirmEnabled(false);
             setConfirmPressed(false);
             setSlideUp(false);
         }, 500);
-    }, [setPlaceholderImages, setWonTiles, setConfirmEnabled, setConfirmPressed, setSlideUp]);
+    }, [setPlaceholderTiles, setWonTiles, setConfirmEnabled, setConfirmPressed, setSlideUp]);
 
     const handleConfirmClick = useCallback(() => {
-        const tiles = winningTiles(placeholderImages);
+        const tiles = winningTiles(placeholderTiles);
         setWonTiles(tiles);
         setConfirmPressed(true);
         setConfirmEnabled(false);
-    }, [placeholderImages, setConfirmEnabled, setConfirmPressed, setWonTiles, winningTiles]);
+    }, [placeholderTiles, setConfirmEnabled, setConfirmPressed, setWonTiles, winningTiles]);
 
     return (
         <div className="button-container">
@@ -55,7 +56,7 @@ export const KeyboardButtons: React.FC<KeyboardButtonsProps> = ({
                 startIcon={<DeleteRounded />}
                 color='primary'
                 onClick={handleClearClick}
-                disabled={placeholderImages.length === 0}
+                disabled={placeholderTiles.length === 0}
             >
                 Clear
             </Button>
@@ -78,7 +79,7 @@ export const KeyboardButtons: React.FC<KeyboardButtonsProps> = ({
                     ]}
                     onChange={(e) => {
                         if (e) {
-                            setPlaceholderImages([]);
+                            setPlaceholderTiles([]);
                             setLengthOfTiles(e.value);
                         }
                     }}
