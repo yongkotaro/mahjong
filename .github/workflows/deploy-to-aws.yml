@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        
+      - name: Set API URL
+        run: echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
 
       - name: Set up Node.js
         uses: actions/setup-node@v2

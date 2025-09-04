@@ -19,6 +19,7 @@
 .env.production.local
 generateImports.ts
 .vscode/
+.env 
 
 npm-debug.log*
 yarn-debug.log*

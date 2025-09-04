@@ -3,10 +3,12 @@ import './Navbar.css';
 import { MenuRounded, ClearRounded } from '@mui/icons-material';
 import logo_dark from '../../assets/logo_dark.png';
 import logo_light from '../../assets/logo_light.png';
+import { useAuth } from '../../contexts/AuthContext';
 
 export const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolledPastHeader, setScrolledPastHeader] = useState(false);
+  const { user, logout } = useAuth();
 
   const handleScroll = () => {
     const header = document.getElementById('header');
@@ -40,6 +42,9 @@ export const Navbar: React.FC = () => {
         <li className='nav-item'><a href='#highlights' onClick={() => setMenuOpen(false)}>Highlights</a></li>
         <li className='nav-item'><a href='#more' onClick={() => setMenuOpen(false)}>Resources</a></li>
         <li className='nav-item'><a href='#contact' onClick={() => setMenuOpen(false)}>Contact</a></li>
+        {user && (
+          <li className='nav-item'><a href='#' onClick={logout}>Logout</a></li>
+        )}
       </ul>
     </nav>
   );
