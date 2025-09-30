@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
-interface LoginProps {
-    setShowRegister: (value: boolean) => void;
-}
-const Login = ({ setShowRegister }: LoginProps) => {
+
+const Login = () => {
+    const navigate = useNavigate();
     const { login } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -56,7 +56,10 @@ const Login = ({ setShowRegister }: LoginProps) => {
                 </form>
                 <div style={{ textAlign: 'center', marginTop: 18 }}>
                     <span>Don't have an account? </span>
-                    <a onClick={() => setShowRegister(true)} style={{ color: '#3a7bd5', textDecoration: 'underline', cursor: 'pointer' }}>Register</a>
+                    <Link to="/register" style={{ color: '#3a7bd5', textDecoration: 'underline' }}>Register</Link>
+                </div>
+                <div style={{ textAlign: 'center', marginTop: 18 }}>
+                    <Link to="/guest" style={{ color: '#3a7bd5', textDecoration: 'underline' }}>Continue as Guest</Link>
                 </div>
             </div>
         </div>

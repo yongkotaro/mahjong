@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './Navbar.css';
 import { MenuRounded, ClearRounded } from '@mui/icons-material';
 import logo_dark from '../../assets/logo_dark.png';
 import logo_light from '../../assets/logo_light.png';
 import { useAuth } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
-export const Navbar: React.FC = () => {
+export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolledPastHeader, setScrolledPastHeader] = useState(false);
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleScroll = () => {
     const header = document.getElementById('header');
@@ -18,6 +20,16 @@ export const Navbar: React.FC = () => {
     }
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+    setMenuOpen(false);
+  };
+
+  const handleLogin = () => {
+    navigate('/login');
+    setMenuOpen(false);
+  };
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -42,8 +54,14 @@ export const Navbar: React.FC = () => {
         <li className='nav-item'><a href='#highlights' onClick={() => setMenuOpen(false)}>Highlights</a></li>
         <li className='nav-item'><a href='#more' onClick={() => setMenuOpen(false)}>Resources</a></li>
         <li className='nav-item'><a href='#contact' onClick={() => setMenuOpen(false)}>Contact</a></li>
-        {user && (
-          <li className='nav-item'><a href='#' onClick={logout}>Logout</a></li>
+        {user ? (
+          <li className='nav-item'>
+            <li className='nav-item'><a href='#' onClick={handleLogout}>Logout</a></li>
+          </li>
+        ) : (
+          <li className='nav-item'>
+            <li className='nav-item'><a href='#' onClick={handleLogin}>Login</a></li>
+          </li>
         )}
       </ul>
     </nav>

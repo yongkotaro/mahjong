@@ -1,34 +1,33 @@
 import './App.css';
 import { Home, Highlights, Header, Footer, MoreSection } from './containers';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import { useState } from 'react';
+
+const MainApp = () => (
+  <div className="App">
+    <Header />
+    <Highlights />
+    <Home />
+    <MoreSection />
+    <Footer />
+  </div>
+);
 
 function App() {
   const { user } = useAuth();
-  const [showRegister, setShowRegister] = useState(false);
-
-  if (!user) {
-    return (
-      <div className="App">
-        {showRegister ? (
-          <Register setShowRegister={setShowRegister} />
-        ) : (
-          <Login setShowRegister={setShowRegister} />
-        )}
-      </div>
-    );
-  }
 
   return (
-    <div className="App">
-      <Header />
-      <Highlights />
-      <Home />
-      <MoreSection />
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/guest" element={<MainApp />} />
+      <Route
+        path="/"
+        element={user ? <MainApp /> : <Navigate to="/login" />}
+      />
+    </Routes>
   );
 }
 

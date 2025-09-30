@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 
-interface RegisterProps {
-    setShowRegister: (value: boolean) => void;
-}
-const Register = ({ setShowRegister }: RegisterProps) => {
+const Register = () => {
+    const navigate = useNavigate();
     const { register } = useAuth();
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -16,9 +15,9 @@ const Register = ({ setShowRegister }: RegisterProps) => {
         e.preventDefault();
         setLoading(true);
         try {
-            // Replace with real registration logic/API call
             await register(email, username, password);
-            toast.success('Registered successfully!');
+            toast.success('Registration successful! Please login.');
+            navigate('/login');
         } catch (err) {
             toast.error('Registration failed. Please try again.');
         } finally {
@@ -71,7 +70,7 @@ const Register = ({ setShowRegister }: RegisterProps) => {
                 </form>
                 <div style={{ textAlign: 'center', marginTop: 18 }}>
                     <span>Already have an account? </span>
-                    <a onClick={() => setShowRegister(false)} style={{ color: '#3a7bd5', textDecoration: 'underline', cursor: 'pointer' }}>Sign in</a>
+                    <Link to="/login" style={{ color: '#3a7bd5', textDecoration: 'underline' }}>Sign In</Link>
                 </div>
             </div>
         </div>
