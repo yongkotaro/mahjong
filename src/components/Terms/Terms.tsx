@@ -6,10 +6,6 @@ export const Terms: React.FC = () => {
         <div className="terms-container" id='terms'>
             <h1 className="terms-title">Terms and Conditions</h1>
 
-            <p className="terms-paragraph">
-                Welcome to our Mahjong game website. By using this website, you agree to the following terms and conditions.
-            </p>
-
             <h2 className="terms-subtitle">1. No Liability for Game Losses</h2>
             <p className="terms-paragraph">
                 This website is not liable for any losses incurred during a game of Mahjong. The outcome of any game falls on the responsibility of the players involved.

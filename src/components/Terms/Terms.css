@@ -1,34 +1,65 @@
 .terms-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    font-family: 'Poppins';
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    line-height: 1.8;
 }
 
 .terms-title {
-    font-size: 2em;
-    margin-bottom: 20px;
-    color: #333;
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+    border-bottom: 3px solid #1976d2;
+    padding-bottom: 15px;
 }
 
 .terms-subtitle {
-    font-size: 1.5em;
-    margin-top: 20px;
-    color: #444;
+    font-size: 1.25em;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #1976d2;
+    display: flex;
+    align-items: center;
 }
 
 .terms-paragraph {
     font-size: 1em;
-    line-height: 1.6;
-    margin-bottom: 10px;
-    color: #555;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    color: #444;
+    text-align: justify;
+}
+
+.terms-paragraph:first-of-type {
+    margin-top: 25px;
+    font-style: italic;
+    color: #666;
 }
 
 @media (max-width: 768px) {
     .terms-container {
-        font-size: 0.75rem;
+        padding: 25px;
+    }
+
+    .terms-title {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .terms-subtitle {
+        font-size: 1.1em;
+        margin-top: 20px;
+        margin-bottom: 12px;
+    }
+
+    .terms-paragraph {
+        font-size: 0.95em;
+        line-height: 1.6;
     }
 }

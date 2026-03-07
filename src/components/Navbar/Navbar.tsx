@@ -4,7 +4,7 @@ import { MenuRounded, ClearRounded } from '@mui/icons-material';
 import logo_dark from '../../assets/logo_dark.png';
 import logo_light from '../../assets/logo_light.png';
 import { useAuth } from '../../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -51,9 +51,6 @@ export const Navbar = () => {
         {menuOpen ? <ClearRounded /> : <MenuRounded />}
       </div>
       <ul id="nav-menu" className={menuOpen ? "open" : "close"}>
-        <li className='nav-item'><a href='#highlights' onClick={() => setMenuOpen(false)}>Highlights</a></li>
-        <li className='nav-item'><a href='#more' onClick={() => setMenuOpen(false)}>Resources</a></li>
-        <li className='nav-item'><a href='#contact' onClick={() => setMenuOpen(false)}>Contact</a></li>
         {user ? (
           <li className='nav-item'>
             <li className='nav-item'><a href='#' onClick={handleLogout}>Logout</a></li>
@@ -63,6 +60,8 @@ export const Navbar = () => {
             <li className='nav-item'><a href='#' onClick={handleLogin}>Login</a></li>
           </li>
         )}
+        <li className='nav-item'><a href='#contact' onClick={() => setMenuOpen(false)}>Contact</a></li>
+        <li className='nav-item'><Link to='/terms' className='nav-link' onClick={() => setMenuOpen(false)}>Terms</Link></li>
       </ul>
     </nav>
   );
