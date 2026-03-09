@@ -1,10 +1,9 @@
 import './App.css';
-import { Home, Highlights, Header, Footer } from './containers';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
-import Login from './pages/Login';
-import Register from './pages/Register';
+import GuestPage from './pages/GuestPage';
 import TermsPage from './pages/Terms';
+import { Home, Highlights, Header, Footer } from './containers';
 
 const MainApp = () => (
   <div className="App">
@@ -20,17 +19,14 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
       <Route path="/terms" element={<TermsPage />} />
-      <Route path="/guest" element={<MainApp />} />
+      <Route path="/guest" element={<GuestPage />} />
       <Route
         path="/"
-        element={user ? <MainApp /> : <Navigate to="/login" />}
+        element={user ? <MainApp /> : <Navigate to="/guest" />}
       />
     </Routes>
   );
 }
-
 
 export default App;

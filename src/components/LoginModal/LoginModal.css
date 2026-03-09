@@ -1,0 +1,151 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(60, 60, 120, 0.12);
+    max-width: 350px;
+    width: 100%;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: #2d3a4a;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: #3a7bd5;
+}
+
+.modal-icon {
+    display: block;
+    margin: 0 auto 16px;
+    height: 50px;
+    width: auto;
+}
+
+.modal-title {
+    text-align: center;
+    margin-bottom: 24px;
+    color: #2d3a4a;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #2d3a4a;
+    display: block;
+    cursor: pointer;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #bfc8d6;
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #3a7bd5;
+    box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.1);
+}
+
+.form-button {
+    padding: 12px 0;
+    border-radius: 8px;
+    background: #3a7bd5;
+    color: #fff;
+    font-weight: 600;
+    font-size: 17px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(60, 60, 120, 0.08);
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.2s;
+}
+
+.form-button:hover:not(:disabled) {
+    background: #2a5fa0;
+    box-shadow: 0 4px 12px rgba(60, 60, 120, 0.12);
+    transform: translateY(-1px);
+}
+
+.form-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.modal-footer {
+    text-align: center;
+    margin-top: 18px;
+}
+
+.modal-footer p {
+    margin: 12px 0;
+    font-size: 14px;
+    color: #2d3a4a;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: #3a7bd5;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.link-button:hover {
+    color: #2a5fa0;
+}
