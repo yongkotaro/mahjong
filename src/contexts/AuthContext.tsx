@@ -1,10 +1,8 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode, useMemo } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
 
 interface AuthContextType {
   user: string | null;
-  token: string | null;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, username: string, password: string) => Promise<void>;
   logout: () => void;
@@ -12,66 +10,88 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Base API URL from environment
+// Base API URL from environment - MUST be HTTPS in production
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+
+// Enable credentials globally for all axios requests
+axios.defaults.withCredentials = true;
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<string | null>(null);
-  const [token, setToken] = useState<string | null>(null);
 
-  // Setup axios interceptor for Authorization header
+  // Restore user info from sessionStorage on refresh
   useEffect(() => {
-    const interceptor = axios.interceptors.request.use((config) => {
-      if (token) {
-        config.headers = config.headers || {};
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-      return config;
-    });
-
-    return () => axios.interceptors.request.eject(interceptor);
-  }, [token]);
-
-  // Optional: restore token from sessionStorage on refresh
-  useEffect(() => {
-    const savedToken = sessionStorage.getItem("token");
     const savedUser = sessionStorage.getItem("user");
-    if (savedToken && savedUser) {
-      setToken(savedToken);
+    if (savedUser) {
       setUser(savedUser);
     }
   }, []);
 
   const login = async (email: string, password: string) => {
     try {
-      const res = await axios.post(`${API_URL}/auth/login`, { email, password });
-      const token = res.data.token;
-      setToken(token);
+      // Validate inputs on client side
+      if (!email || !password) {
+        throw new Error("Email and password are required");
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        throw new Error("Invalid email format");
+      }
+
+      const res = await axios.post(
+        `${API_URL}/auth/login`,
+        { email, password }
+      );
+
       setUser(email);
-      sessionStorage.setItem("token", token);
       sessionStorage.setItem("user", email);
-    } catch (error) {
-      throw error;
+    } catch (error: any) {
+      const message = error.response?.data?.message || error.message;
+      throw new Error(message);
     }
   };
 
   const logout = () => {
-    setToken(null);
     setUser(null);
-    sessionStorage.removeItem("token");
     sessionStorage.removeItem("user");
+    // Call backend to clear HttpOnly cookie
+    axios.post(`${API_URL}/auth/logout`, {}).catch(() => { });
   };
 
   const register = async (email: string, username: string, password: string) => {
     try {
-      const res = await axios.post(`${API_URL}/auth/register`, { email, username, password });
-    } catch (error) {
-      throw error;
+      // Client-side validation
+      if (!email || !username || !password) {
+        throw new Error("All fields are required");
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        throw new Error("Invalid email format");
+      }
+      if (password.length < 8) {
+        throw new Error("Password must be at least 8 characters");
+      }
+      if (!/(?=.*[A-Za-z])(?=.*\d)/.test(password)) {
+        throw new Error("Password must contain letters and numbers");
+      }
+
+      await axios.post(`${API_URL}/auth/register`, {
+        email,
+        username,
+        password
+      });
+    } catch (error: any) {
+      const message = error.response?.data?.message || error.message;
+      throw new Error(message);
     }
   };
 
+  // Memoize context value to prevent unnecessary re-renders
+  const value = useMemo(
+    () => ({ user, register, login, logout }),
+    [user]
+  );
+
   return (
-    <AuthContext.Provider value={{ user, token, register, login, logout }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );
